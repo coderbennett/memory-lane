@@ -1,40 +1,24 @@
-import React from 'react';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-import Home from './pages/Home';
-import SingleThought from './pages/SingleThought';
-import Header from './components/Header';
-import Footer from './components/Footer';
-
-const client = new ApolloClient({
-  uri: '/graphql',
-  cache: new InMemoryCache(),
-});
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
   return (
-    <ApolloProvider client={client}>
-      <Router>
-        <div className="flex-column justify-flex-start min-100-vh">
-          <Header />
-          <div className="container">
-            <Routes>
-              <Route 
-                path="/" 
-                element={<Home />} 
-              />
-              {/* Create a route to display a single thought's comments based on its `thoughtId` provided in the URL */}
-              <Route 
-                path="/thoughts/:thoughtId" 
-                element={<SingleThought />} 
-              />
-            </Routes>
-          </div>
-          <Footer />
-        </div>
-      </Router>
-    </ApolloProvider>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
   );
 }
 
