@@ -10,6 +10,12 @@ const resolvers = {
         timeline: async (parent, { timelineId }) => {
             return Timeline.findOne({ _id: timelineId });
         },
+        users: async () => {
+            return await User.find({});
+        },
+        timelines: async () => {
+            return await Timeline.find({});
+        }   
     },
 
     Mutation: {

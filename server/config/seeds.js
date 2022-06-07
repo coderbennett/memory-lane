@@ -29,7 +29,7 @@ db.once('open', async () => {
     await User.create({
         username: 'notaspy',
         email: 'nsa@gov.com',
-        password: 'oops'
+        password: 'password123'
     });
 
     console.log('users seeded');
