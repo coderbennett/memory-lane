@@ -15,11 +15,9 @@ const resolvers = {
     Mutation: {
         addUser: async (parent, args) => {
             const user = await User.create(args);
-            //implement JWT later
-            //const token = signToken(user);
+            const token = signToken(user);
 
-            // add token to return later here
-            return user;
+            return {token, user};
         },
         addTimeline: async (parent, args) => {
             return Timeline.create(args);
@@ -40,6 +38,23 @@ const resolvers = {
                 { $pull: { moments: { _id: momentId }}},
                 { new: true }
             );
+        },
+        login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
+
+            if (!user) {
+                throw new AuthenticationError('Incorrect login credentials!');
+            }
+
+            const correctPw = await user.isCorrectPassword(password);
+
+            if (!correctPw) {
+                throw new AuthenticationError('Incorrect login credentials!');
+            }
+
+            const token = signToken(user);
+
+            return {token, user};
         }
     }
 };
