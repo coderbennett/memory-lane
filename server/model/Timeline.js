@@ -48,4 +48,8 @@ const timelineSchema = new Schema({
         }
     ]
 
-})
+});
+
+const Timeline = mongoose.model('Timeline', timelineSchema);
+
+module.exports = Timeline;
