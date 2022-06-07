@@ -30,7 +30,6 @@ const typeDefs = gql`
     type Query {
         user(userId: ID!): User
         timeline(timelineId: ID!): Timeline
-        moments: [Moment]!
     }
 
     type Mutation {
