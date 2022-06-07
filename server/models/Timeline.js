@@ -50,6 +50,6 @@ const timelineSchema = new Schema({
 
 });
 
-const Timeline = mongoose.model('Timeline', timelineSchema);
+const Timeline = model('Timeline', timelineSchema);
 
 module.exports = Timeline;
