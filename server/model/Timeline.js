@@ -29,10 +29,6 @@ const timelineSchema = new Schema({
                 required: true,
                 trim: true,
             },
-            author: {
-                type: String,
-                required: true
-            },
             imageLink: {
                 type: String,
                 required: true
