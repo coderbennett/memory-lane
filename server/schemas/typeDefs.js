@@ -27,6 +27,11 @@ const typeDefs = gql`
         day: Int
     }
 
+    type Auth {
+        token: ID
+        user: User
+    }
+
     type Query {
         user(userId: ID!): User
         timeline(timelineId: ID!): Timeline
