@@ -29,3 +29,30 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_TIMELINE = gql`
+  mutation addTimeline(
+    $title: String!
+    $description: String!
+    $author: String!
+  ) {
+    addTimeline(
+      title: $title
+      description: $description
+      author: $author
+    ) {
+      _id
+      title
+      description
+      author
+      moments {
+        _id
+        description
+        imageLink
+        year
+        month
+        day
+      }
+    }
+  }
+`

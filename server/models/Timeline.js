@@ -38,12 +38,10 @@ const timelineSchema = new Schema({
                 required: true
             },
             month: {
-                type: Number,
-                required: true
+                type: Number
             },
             day: {
-                type: Number,
-                required: true
+                type: Number
             }
         }
     ]
