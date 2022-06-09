@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Timeline from './pages/Timeline';
+import Dashboard from './pages/Dashboard';
 import Header from '../src/components/Header/Header';
 
 
@@ -24,6 +25,9 @@ function App() {
             <Route
               path="/timeline/:timelineId"
               element={<Timeline />} />
+            <Route
+              path="/dashboard/:userId"
+              element={<Dashboard />} />
         </Routes>
       </Router>
     </ApolloProvider>
