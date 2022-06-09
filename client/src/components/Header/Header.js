@@ -3,24 +3,44 @@ import { Link } from 'react-router-dom'
 
 export default function Header() {
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar fixed top-0 w-100 z-50 bg-base-100">
             <div className="flex-1">
                 <a href="/" className="btn btn-ghost normal-case text-xl">daisyUI</a>
             </div>
             <div className="flex-none">
                 <ul className="menu menu-horizontal p-0">
                     <li><a>Item 1</a></li>
-                    <li tabIndex="0">
-                        <a>
-                            Parent
-                            <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
-                        </a>
-                        <ul className="p-2 bg-base-100">
-                            <li><a>Submenu 1</a></li>
-                            <li><a>Submenu 2</a></li>
-                        </ul>
+                    <li><a>Item 1</a></li>
+                    <li>
+                        <label for="my-modal-4" className="btn modal-button bg-primary">Login</label>
+
+
+                        <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+                        <label for="my-modal-4" className="modal cursor-pointer">
+                            <label className="modal-box relative" for="">
+                                <h3 className="text-lg font-bold">Login Here!</h3>
+
+                                <div class="form-control">
+                                    <label class="my-3 input-group input-group-vertical">
+                                        <span className="py-1">Email</span>
+                                        <input type="text" placeholder="email@domain.com" class="input input-bordered" />
+                                    </label>
+                                    <label class="my-3 input-group input-group-vertical">
+                                        <span className="py-1">Password</span>
+                                        <input type="password" placeholder="password" class="input input-bordered" />
+                                    </label>
+                                    <div className="flex flex-row justify-between">
+                                        <button type="submit" class="btn btn-primary">Login</button>
+                                        <button type="submit" class="btn btn-primary">Signup</button>
+                                    </div>
+                                </div>
+                            </label>
+                        </label>
                     </li>
-                    <li><a>Item 3</a></li>
+
+
+
+
                 </ul>
             </div>
         </div>
