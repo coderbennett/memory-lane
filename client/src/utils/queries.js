@@ -18,4 +18,16 @@ export const QUERY_TIMELINE = gql`
           }
         }
       }
-`
+`;
+
+export const QUERY_USER = gql`
+    query getUser($userId: ID!) {
+        user(userId: $userId) {
+            _id
+            username
+            email
+            password
+            timelines
+        }
+    }
+`;
