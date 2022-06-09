@@ -34,20 +34,27 @@ export default function AddMoment() {
         <div className="addmomentmodal">
             <h3 className="text-lg font-bold">Login Here!</h3>
 
-            <div class="form-control">
-                <label class="my-3 input-group input-group-vertical">
-                    <span className="py-1">Email</span>
-                    <input type="text" placeholder="email@domain.com" class="input input-bordered" />
+            <form className="form-control" onSubmit={handleFormSubmit}>
+                <label className="my-3 input-group input-group-vertical">
+                    <span className="py-1" htmlFor="email">Email</span>
+                    <input name="email" type="email" id="email"
+                        onChange={handleChange} placeholder="email@domain.com" className="input input-bordered" />
                 </label>
-                <label class="my-3 input-group input-group-vertical">
+                <label htmlFor="pwd" className="my-3 input-group input-group-vertical">
                     <span className="py-1">Password</span>
-                    <input type="password" placeholder="password" class="input input-bordered" />
+                    <input name="password" type="password" id="pwd"
+                        onChange={handleChange} placeholder="password" className="input input-bordered" />
                 </label>
                 <div className="flex flex-row justify-between">
-                    <button type="submit" class="btn btn-primary">Login</button>
-                    <button type="submit" class="btn btn-primary">Signup</button>
+                    <button type="submit" className="btn btn-primary">Login</button>
+                    <button className="btn btn-primary">Signup</button>
                 </div>
-            </div>
+                {error ? (
+                    <div>
+                        <p className="error-text">Invalid Email or Password</p>
+                    </div>
+                ) : null}
+            </form>
         </div>
     )
 }
