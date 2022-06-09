@@ -3,6 +3,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider, useQuery, gql } from '@apo
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Home from './pages/Home';
+import Timeline from './pages/Timeline';
 import Header from '../src/components/Header/Header';
 
 
@@ -20,6 +21,9 @@ function App() {
           <Route
             path="/"
             element={<Home />} />
+            <Route
+              path="/timeline/:timelineId"
+              element={<Timeline />} />
         </Routes>
       </Router>
     </ApolloProvider>
