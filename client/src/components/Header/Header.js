@@ -20,18 +20,18 @@ export default function Header() {
                             <label className="modal-box relative" for="">
                                 <h3 className="text-lg font-bold">Login Here!</h3>
 
-                                <div class="form-control">
-                                    <label class="my-3 input-group input-group-vertical">
+                                <div className="form-control">
+                                    <label className="my-3 input-group input-group-vertical">
                                         <span className="py-1">Email</span>
-                                        <input type="text" placeholder="email@domain.com" class="input input-bordered" />
+                                        <input type="text" placeholder="email@domain.com" className="input input-bordered" />
                                     </label>
-                                    <label class="my-3 input-group input-group-vertical">
+                                    <label className="my-3 input-group input-group-vertical">
                                         <span className="py-1">Password</span>
-                                        <input type="password" placeholder="password" class="input input-bordered" />
+                                        <input type="password" placeholder="password" className="input input-bordered" />
                                     </label>
                                     <div className="flex flex-row justify-between">
-                                        <button type="submit" class="btn btn-primary">Login</button>
-                                        <button type="submit" class="btn btn-primary">Signup</button>
+                                        <button type="submit" className="btn btn-primary">Login</button>
+                                        <button type="submit" className="btn btn-primary">Signup</button>
                                     </div>
                                 </div>
                             </label>
