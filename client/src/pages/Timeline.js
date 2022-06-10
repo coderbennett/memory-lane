@@ -34,14 +34,30 @@ const Timeline = () => {
         }
 
         return (
-            <div className="flex flex-row justify-evenly">
-                {isEven ? (
+            <div className="grid grid-row-1 grid-cols-12 gap-96 mt-16 border-b-2 pb-16">
+                {!isEven ? (
+                <>    
                     <div className='w-96'></div>
+                    {momentArray && momentArray.map((moment) => (
+                    <>
+                        <div key={moment._id} class="card w-96 bg-base-100 shadow-xl">
+                            <figure><img src={moment.imageLink} alt={moment.title} /></figure>
+                            <div class="card-body">
+                                <h2 class="card-title">{moment.month} {moment.day} {moment.year}</h2>
+                                <p>{moment.description}</p>
+                                <div class="card-actions justify-end">
+                                    <button class="btn btn-primary">Edit Moment</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='w-96'></div>
+                    </>
+                    ))}
+                </>
                 ) : (
-                <></>
-                )}
-                {momentArray.map((moment) => (
                 <>
+                {momentArray && momentArray.map((moment) => ( 
+                    <> 
                     <div key={moment._id} class="card w-96 bg-base-100 shadow-xl">
                         <figure><img src={moment.imageLink} alt={moment.title} /></figure>
                         <div class="card-body">
@@ -52,9 +68,12 @@ const Timeline = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="w-96"></div>
-                </>
+                    <div className='w-96'></div>
+                    </>
                 ))}
+
+                </>
+                )}
             </div>
         )
     }
@@ -63,10 +82,9 @@ const Timeline = () => {
     }
 
     return (
-        <section id="timeline">
+        <section id="timeline" className="overflow-x-scroll">
             <h2>{timeline.title}</h2>
             {renderMoments(false)}
-            <hr className="my-6"></hr>
             {renderMoments(true)}
         </section>
     )
