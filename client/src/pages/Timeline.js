@@ -94,12 +94,12 @@ const Timeline = () => {
 
         let columns = momentArray.length * 2;
         columns++;
-
+        
         return (
-            <div className={"grid grid-row-1 grid-cols-"+ columns +" gap-96 mt-16 border-b-2 pb-16 w-fit"}>
+            <div className={"grid grid-row-1 grid-cols-" + columns + " gap-12 mt-16 border-b-2 pb-16 w-fit"}>
                 {!isEven ? (
                 <>    
-                    <div className='w-72'></div>
+                    <div className='w-12'></div>
                     {momentArray && momentArray.map((moment) => (
                     <>
                         <div key={moment._id} class="mx-3 card w-96 bg-base-100 shadow-xl">
@@ -113,7 +113,7 @@ const Timeline = () => {
                                 <h2 class="card-title">{formatMonth(moment.month)} {formatDay(moment.day)} {moment.year}</h2>
                             </div>
                         </div>
-                        <div className='w-72'></div>
+                        <div className='w-12'></div>
                     </>
                     ))}
                 </>
@@ -132,7 +132,7 @@ const Timeline = () => {
                             <h2 class="card-title">{formatMonth(moment.month)} {formatDay(moment.day)} {moment.year}</h2>
                         </div>
                     </div>
-                    <div className='w-72'></div>
+                    <div className='w-12'></div>
                 </>
                 ))}
 
@@ -156,6 +156,7 @@ const Timeline = () => {
                 {renderMoments(false)}
                 {renderMoments(true)}
             </section>
+            
         </>
     )
 };
