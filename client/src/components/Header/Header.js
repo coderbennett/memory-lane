@@ -12,7 +12,7 @@ export default function Header() {
                 <a href="/" className="btn btn-ghost normal-case text-xl">Memory Lane</a>
             </div>
             <div className="flex-none">
-                <ul className="menu menu-horizontal p-0">
+                <ul className="menu menu-horizontal gap-4 p-0">
                     <li><a>Item 1</a></li>
                     <li><a>Item 1</a></li>
 
@@ -26,7 +26,7 @@ export default function Header() {
                                 <label for="my-modal-1" onClick={() => { setModal(false) }} class="btn btn-sm btn-circle text-primary-content bg-primary absolute right-2 top-2 hover:bg-secondary">✕</label>
 
                                 {/* conditonally change between login and signup modal */}
-                                {!modal ? <Login modal={modal} setModal={setModal} /> : <Signup modal={modal} setModal={setModal} />}
+                                {!modal ? <Login setModal={setModal} /> : <Signup setModal={setModal} />}
                             </div>
                         </div>
 
