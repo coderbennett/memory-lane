@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Signup() {
+export default function Signup({ modal, setModal }) {
 
     return (
         <div>
@@ -24,9 +24,9 @@ export default function Signup() {
                     <span className="py-1">Confirm Password</span>
                     <input type="password" placeholder="password" className="input input-bordered" />
                 </label>
-                <div className="flex flex-row justify-between">
-                    <button type="submit" className="btn btn-primary">Login</button>
+                <div className="flex flex-row gap-4 justify-center">
                     <button type="submit" id="signupBtn" className="btn btn-primary">Signup</button>
+                    <button type="submit" onClick={() => { setModal(false) }} className="btn btn-primary">Back to Login</button>
                 </div>
             </div>
 

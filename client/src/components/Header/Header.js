@@ -1,51 +1,41 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import Login from "../modals/Login";
+import Signup from "../modals/Signup";
 
 export default function Header() {
+
+    const [modal, setModal] = useState(false);
+
     return (
         <div className="navbar fixed top-0 w-100 z-50 bg-base-100">
             <div className="flex-1">
-                <a href="/" className="btn btn-ghost normal-case text-xl">daisyUI</a>
+                <a href="/" className="btn btn-ghost normal-case text-xl">Memory Lane</a>
             </div>
             <div className="flex-none">
                 <ul className="menu menu-horizontal p-0">
                     <li><a>Item 1</a></li>
                     <li><a>Item 1</a></li>
+
+                    {/* login/signup modal */}
                     <li>
-                        <label for="my-modal-4" className="btn modal-button bg-primary">Login</label>
+                        <label for="my-modal-1" class="btn modal-button bg-primary">Login</label>
 
-                        <input type="checkbox" id="my-modal-4" className="modal-toggle" />
-                        <label for="my-modal-4" className="modal cursor-pointer">
-                            <label className="modal-box relative" for="">
-                                <h3 className="text-lg font-bold">Create Timeline</h3>
+                        <input type="checkbox" id="my-modal-1" class="modal-toggle" />
+                        <div class="modal">
+                            <div class="modal-box relative">
+                                <label for="my-modal-1" onClick={() => { setModal(false) }} class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
 
-                                <div className="form-control ">
-                                    <div className="grid grid-cols-2">
-                                        <label className="my-3  input-group input-group-vertical">
-                                            <span className="py-1">Title</span>
-                                            <input type="text" placeholder="Timeline Title" className="input input-bordered" />
-                                        </label>
-                                    </div>
-                                    <label className="my-3 input-group input-group-vertical">
-                                        <span className="py-1">Description</span><textarea class="textarea textarea-bordered" placeholder="Write a little bit about your timeline here"></textarea>
-                                    </label>
+                                {/* conditonally change between login and signup modal */}
+                                {!modal ? <Login modal={modal} setModal={setModal} /> : <Signup modal={modal} setModal={setModal} />}
+                            </div>
+                        </div>
 
-                                    <div className="flex flex-col">
-                                        <button type="submit" className="btn btn-primary ">Create Timeline</button>
-                                    </div>
-                                </div>
-                            </label>
-                        </label>
 
 
 
                     </li>
-
-
-
-
                 </ul>
             </div>
-        </div>
+        </div >
     );
 }
