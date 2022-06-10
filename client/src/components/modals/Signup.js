@@ -35,7 +35,7 @@ export default function Signup({ setModal }) {
 
         if (validate()) {
             console.log(formState);
-            console.log(String(formState.input.email));
+            console.log(formState.input.email);
             console.log(formState.input.password);
             console.log(formState.input.username);
 
