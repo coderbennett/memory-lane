@@ -18,12 +18,12 @@ export default function Header() {
 
                     {/* login/signup modal */}
                     <li>
-                        <label for="my-modal-1" class="btn modal-button bg-primary hover:bg-secondary">Login</label>
+                        <label htmlFor="my-modal-1" className="btn modal-button bg-primary hover:bg-secondary">Login</label>
 
-                        <input type="checkbox" id="my-modal-1" class="modal-toggle" />
-                        <div class="modal active:bg-transparent">
-                            <div class="modal-box relative">
-                                <label for="my-modal-1" onClick={() => { setModal(false) }} class="btn btn-sm btn-circle text-primary-content bg-primary absolute right-2 top-2 hover:bg-secondary">✕</label>
+                        <input type="checkbox" id="my-modal-1" className="modal-toggle" />
+                        <div className="modal active:bg-transparent">
+                            <div className="modal-box relative">
+                                <label htmlFor="my-modal-1" onClick={() => { setModal(false) }} className="btn btn-sm btn-circle text-primary-content bg-primary absolute right-2 top-2 hover:bg-secondary">✕</label>
 
                                 {/* conditonally change between login and signup modal */}
                                 {!modal ? <Login setModal={setModal} /> : <Signup setModal={setModal} />}
