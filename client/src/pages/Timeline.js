@@ -19,42 +19,125 @@ const Timeline = () => {
     const timeline = data?.timeline || {};
     console.log(timeline);
 
+    const formatDay = (day) => {
+        switch (day) {
+            case 1:
+                return '1st,';
+            case 21:
+                return '21st,';
+            case 31:
+                return '31st,';
+            case 2:
+                return '2nd,';
+            case 22:
+                return '22nd,';
+            case 3:
+                return '3rd,';
+            case 23:
+                return '23rd,';
+            default:
+                return day + 'th,'
+        }
+    };
+    
+    const formatMonth = (month) => {
+        switch (month) {
+            case 1:
+                return 'January';
+            case 2:
+                return 'February';
+            case 3:
+                return 'March';
+            case 4:
+                return 'April';
+            case 5:
+                return 'May';
+            case 6:
+                return 'June';
+            case 7:
+                return 'July';
+            case 8:
+                return 'August';
+            case 9:
+                return 'September';
+            case 10:
+                return 'October';
+            case 11:
+                return 'November';
+            default:
+                return 'December';
+        }
+    }
+
     // this function renders the moments
     // takes in a conditional to decide which moments
     // to render
     const renderMoments = (isEven) => {
+        console.log(timeline.moments);
+        let sortedMoments = [...timeline.moments];
+        console.log(sortedMoments);
+        if(sortedMoments !== []) {
+            sortedMoments = sortedMoments.sort((a, b) => {
+                return a.year - b.year || a.month - b.month || a.day - b.day;
+            })
+        }
         let momentArray = [];
-        for (let i = 0; i < timeline.moments.length; i++) {
+
+        for (let i = 0; i < sortedMoments.length; i++) {
             if(i % 2 === 0 && isEven) {
-                momentArray.push(timeline.moments[i]);
+                momentArray.push(sortedMoments[i]);
             }
             if (i % 2 !== 0 && !isEven) {
-                momentArray.push(timeline.moments[i]);
+                momentArray.push(sortedMoments[i]);
             }
         }
 
+        let columns = momentArray.length * 2;
+        columns++;
+        
         return (
-            <div className="flex flex-row justify-evenly">
-                {isEven ? (
-                    <div className='w-96'></div>
-                ) : (
-                <></>
-                )}
-                {momentArray.map((moment) => (
-                <>
-                    <div key={moment._id} class="card w-96 bg-base-100 shadow-xl">
-                        <figure><img src={moment.imageLink} alt={moment.title} /></figure>
-                        <div class="card-body">
-                            <h2 class="card-title">{moment.month} {moment.day} {moment.year}</h2>
-                            <p>{moment.description}</p>
-                            <div class="card-actions justify-end">
-                                <button class="btn btn-primary">Edit Moment</button>
+            <div className={"grid grid-row-1 grid-cols-" + columns + " gap-12 mt-16 border-b-2 pb-16 w-fit"}>
+                {!isEven ? (
+                <>    
+                    <div className='w-12'></div>
+                    {momentArray && momentArray.map((moment) => (
+                    <>
+                        <div key={moment._id} class="mx-3 card w-96 bg-base-100 shadow-xl">
+                            <figure><img src={moment.imageLink} alt={moment.title} /></figure>
+                            <div class="card-body">
+                                <h2 class="card-title">{moment.title}</h2>
+                                <p>{moment.description}</p>
+                                <div class="card-actions justify-end">
+                                    {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<button class="btn btn-primary">Edit Moment</button>) : (<></>)}
+                                </div>
+                                <h2 class="card-title">{formatMonth(moment.month)} {formatDay(moment.day)} {moment.year}</h2>
                             </div>
                         </div>
+                        <div className='w-12'></div>
+                    </>
+                    ))}
+                </>
+                ) : (
+                <>
+                {momentArray && momentArray.map((moment) => ( 
+                <> 
+                    <div key={moment._id} class="mx-3 card w-96 bg-base-100 shadow-xl">
+                        <figure><img src={moment.imageLink} alt={moment.title} /></figure>
+                        <div class="card-body">
+                            <h2 class="card-title">{moment.title}</h2>
+                            <p>{moment.description}</p>
+                            <div class="card-actions justify-end">
+                                {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<button class="btn btn-primary">Edit Moment</button>) : (<></>)}
+                            </div>
+                            <h2 class="card-title">{formatMonth(moment.month)} {formatDay(moment.day)} {moment.year}</h2>
+                        </div>
                     </div>
-                    <div className="w-96"></div>
+                    <div className='w-12'></div>
                 </>
                 ))}
+
+                </>
+                )}
             </div>
         )
     }
@@ -63,12 +146,18 @@ const Timeline = () => {
     }
 
     return (
-        <section id="timeline">
-            <h2>{timeline.title}</h2>
-            {renderMoments(false)}
-            <hr className="my-6"></hr>
-            {renderMoments(true)}
-        </section>
+        <>
+            <h2 className="mt-16 text-center text-4xl font-bold">{timeline.title}</h2>
+            <div className="flex justify-end">
+                <button class="btn btn-primary inline mr-6">Add Moment</button>
+            </div>
+                
+            <section id="timeline" className="overflow-x-scroll">
+                {renderMoments(false)}
+                {renderMoments(true)}
+            </section>
+            
+        </>
     )
 };
 

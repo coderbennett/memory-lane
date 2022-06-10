@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Timeline from './pages/Timeline';
 import Dashboard from './pages/Dashboard';
 import Header from '../src/components/Header/Header';
+import Footer from '../src/components/Footer/Footer';
 
 
 const client = new ApolloClient({
@@ -29,6 +30,7 @@ function App() {
               path="/dashboard/:userId"
               element={<Dashboard />} />
         </Routes>
+        <Footer />
       </Router>
     </ApolloProvider>
   );
