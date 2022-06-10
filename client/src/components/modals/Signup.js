@@ -28,7 +28,7 @@ export default function Signup({ setModal }) {
 
                     {/* send to dashboard after successful signup */}
                     <button type="submit" id="signupBtn" className="btn btn-primary">Signup</button>
-                    <button type="submit" onClick={() => { setModal(false) }} className="btn btn-primary">Back to Login</button>
+                    <button onClick={() => { setModal(false) }} className="btn btn-primary">Back to Login</button>
                 </div>
             </div>
 
