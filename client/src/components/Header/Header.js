@@ -18,12 +18,12 @@ export default function Header() {
 
                     {/* login/signup modal */}
                     <li>
-                        <label for="my-modal-1" class="btn modal-button bg-primary">Login</label>
+                        <label for="my-modal-1" class="btn modal-button bg-primary hover:bg-secondary">Login</label>
 
                         <input type="checkbox" id="my-modal-1" class="modal-toggle" />
-                        <div class="modal">
+                        <div class="modal active:bg-transparent">
                             <div class="modal-box relative">
-                                <label for="my-modal-1" onClick={() => { setModal(false) }} class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                                <label for="my-modal-1" onClick={() => { setModal(false) }} class="btn btn-sm btn-circle text-primary-content bg-primary absolute right-2 top-2 hover:bg-secondary">✕</label>
 
                                 {/* conditonally change between login and signup modal */}
                                 {!modal ? <Login modal={modal} setModal={setModal} /> : <Signup modal={modal} setModal={setModal} />}
