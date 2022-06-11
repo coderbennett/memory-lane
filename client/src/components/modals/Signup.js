@@ -1,31 +1,29 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
-import { ADD_USER } from '../../utils/mutations'
-import { assertValidSDL } from 'graphql/validation/validate';
+import { ADD_USER } from '../../utils/mutations.js';
+import decode from 'jwt-decode';
 
 export default function Signup({ setModal }) {
 
     const [formState, setFormState] = useState({
         input: {
-            username: "",
-            email: "",
-            password: "",
-            confirm_password: ""
+            username: '',
+            email: '',
+            password: '',
+            confirm_password: ''
         }, errors: {}
     });
 
-    const [addUser, { data, loading, error }] = useMutation(ADD_USER);
+    const [addUser, { error, data }] = useMutation(ADD_USER);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormState({
             input: { ...formState.input, [name]: value },
-            errors: { ...formState.errors },
-
+            errors: { ...formState.errors }
         });
     };
-
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -39,32 +37,36 @@ export default function Signup({ setModal }) {
             console.log(formState.input.password);
             console.log(formState.input.username);
 
-            const mutationResponse = await addUser({
-                variables: {
-                    email: formState.input.email,
-                    password: formState.input.password,
-                    username: formState.input.username,
-                },
-            });
+            const {username, email, password} = formState.input;
 
-            const token = mutationResponse.data.addUser.token;
-            const userId = mutationResponse.data.addUser.user._id;
-            Auth.login(token, userId);
-
-            let input = {
-                username: "",
-                email: "",
-                password: "",
-                confirm_password: ""
-            };
-            setFormState({ input: input });
-
-            alert('Successful Signup');
+            try {
+                const { data } = await addUser({
+                    variables: { 
+                        username: username,
+                        email: email,
+                        password: password
+                    },
+                });
+    
+                const token = data.addUser.token;
+                const decodeToken = decode(token);
+                const userId = decodeToken.data._id;
+                Auth.login(token, userId);
+    
+                let input = {
+                    username: "",
+                    email: "",
+                    password: "",
+                    confirm_password: ""
+                };
+                setFormState({ input: input });
+    
+                alert('Successful Signup');
+            } catch (e) {
+                console.error(e);
+            }
         }
     };
-
-
-
 
     const validate = () => {
         let input = formState.input;
@@ -102,7 +104,7 @@ export default function Signup({ setModal }) {
 
         if (typeof input.password !== "undefined" && typeof input.confirm_password !== "undefined") {
 
-            if (input.password != input.confirm_password) {
+            if (input.password !== input.confirm_password) {
                 isValid = false;
                 errors.password = "Passwords don't match";
             }

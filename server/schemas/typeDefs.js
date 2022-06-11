@@ -6,7 +6,7 @@ const typeDefs = gql`
         username: String
         email: String
         password: String
-        timelines: [Timeline]
+        timelines: [Timeline]!
     }
 
     type Timeline {
@@ -14,7 +14,7 @@ const typeDefs = gql`
         title: String
         description: String
         author: String
-        moments: [Moment]
+        moments: [Moment]!
     }
 
     type Moment {
@@ -28,7 +28,7 @@ const typeDefs = gql`
     }
 
     type Auth {
-        token: ID
+        token: ID!
         user: User
     }
 
@@ -40,7 +40,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        addUser(username: String!, email: String!, password: String!): User
+        addUser(username: String!, email: String!, password: String!): Auth
         addTimeline(title: String!, description: String!, author: String!): Timeline
         deleteTimeline(timelineId: ID!): Timeline
         addMoment(timelineId: ID!, title: String!, description: String!, imageLink: String!, year: Int!, month: Int, day: Int): Timeline

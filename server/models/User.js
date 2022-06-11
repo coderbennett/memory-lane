@@ -23,7 +23,6 @@ const userSchema = new Schema({
     timelines: [Timeline.schema]
 });
 
-
 userSchema.pre('save', async function(next) {
     if (this.isNew || this.isModified('password')) {
         const saltRounds = 10;

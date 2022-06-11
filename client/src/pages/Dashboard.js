@@ -35,6 +35,9 @@ const Dashboard = () => {
         <div className="flex flex-col">
             <h2>{user.username}'s Dashboard</h2>
             <h3>Your Timelines</h3>
+            <div class="card-actions justify-end">
+                                <button class="btn btn-primary">Create Timeline</button>
+                            </div>
             {user.timelines &&
                 user.timelines.map((timeline) => (
                     <div className="card w-3/4 bg-base-100 shadow-xl">

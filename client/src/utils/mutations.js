@@ -12,35 +12,20 @@ export const LOGIN = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser(
-    $username: String!
-    $email: String!
-    $password: String!
-  ) {
-    addUser(
-      username: $username
-      email: $email
-      password: $password
-    ) {
+  mutation addUser($username: String!, $email: String!, $password: String!) {
+    addUser(username: $username, email: $email, password: $password) {
       token
       user {
         _id
+        username
       }
     }
   }
 `;
 
 export const ADD_TIMELINE = gql`
-  mutation addTimeline(
-    $title: String!
-    $description: String!
-    $author: String!
-  ) {
-    addTimeline(
-      title: $title
-      description: $description
-      author: $author
-    ) {
+  mutation addTimeline($title: String!, $description: String!, $author: String!) {
+    addTimeline(title: $title, description: $description, author: $author) {
       _id
       title
       description
@@ -55,4 +40,4 @@ export const ADD_TIMELINE = gql`
       }
     }
   }
-`
+`;
