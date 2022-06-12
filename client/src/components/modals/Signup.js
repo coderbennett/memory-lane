@@ -52,16 +52,6 @@ export default function Signup({ setModal }) {
                 const decodeToken = decode(token);
                 const userId = decodeToken.data._id;
                 Auth.login(token, userId);
-    
-                let input = {
-                    username: "",
-                    email: "",
-                    password: "",
-                    confirm_password: ""
-                };
-                setFormState({ input: input });
-    
-                alert('Successful Signup');
             } catch (e) {
                 console.error(e);
             }

@@ -19,6 +19,12 @@ const Timeline = () => {
     const timeline = data?.timeline || {};
     console.log(timeline);
 
+    if(!timeline.moments.length) {
+        return (
+            <h3 className="mt-6 text-center text-2xl font-bold">Oops! It Seems Like This Timeline Has No Moments Yet..</h3>
+        );
+    }
+
     const formatDay = (day) => {
         switch (day) {
             case 1:
@@ -73,9 +79,8 @@ const Timeline = () => {
     // takes in a conditional to decide which moments
     // to render
     const renderMoments = (isEven) => {
-        console.log(timeline.moments);
+
         let sortedMoments = [...timeline.moments];
-        console.log(sortedMoments);
         if(sortedMoments !== []) {
             sortedMoments = sortedMoments.sort((a, b) => {
                 return a.year - b.year || a.month - b.month || a.day - b.day;
@@ -93,24 +98,24 @@ const Timeline = () => {
         }
 
         let columns = momentArray.length * 2;
-        columns++;
+        const sCols = ["grid-cols-", columns].join('');
         
         return (
-            <div className={"grid grid-row-1 grid-cols-" + columns + " gap-12 mt-16 border-b-2 pb-16 w-fit"}>
+            <div className={`grid grid-row-1 gap-12 mt-16 border-b-2 pb-16 w-fit ${sCols}`}>
                 {!isEven ? (
                 <>    
                     <div className='w-12'></div>
                     {momentArray && momentArray.map((moment) => (
                     <>
-                        <div key={moment._id} class="mx-3 card w-96 bg-base-100 shadow-xl">
+                        <div key={moment._id} className="mx-3 card w-96 bg-base-100 shadow-xl">
                             <figure><img src={moment.imageLink} alt={moment.title} /></figure>
-                            <div class="card-body">
-                                <h2 class="card-title">{moment.title}</h2>
+                            <div className="card-body">
+                                <h2 className="card-title">{moment.title}</h2>
                                 <p>{moment.description}</p>
-                                <div class="card-actions justify-end">
-                                    {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<button class="btn btn-primary">Edit Moment</button>) : (<></>)}
+                                <div className="card-actions justify-end">
+                                    {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<button className="btn btn-primary">Delete Moment</button>) : (<></>)}
                                 </div>
-                                <h2 class="card-title">{formatMonth(moment.month)} {formatDay(moment.day)} {moment.year}</h2>
+                                <h2 className="card-title">{formatMonth(moment.month)} {formatDay(moment.day)} {moment.year}</h2>
                             </div>
                         </div>
                         <div className='w-12'></div>
@@ -121,15 +126,15 @@ const Timeline = () => {
                 <>
                 {momentArray && momentArray.map((moment) => ( 
                 <> 
-                    <div key={moment._id} class="mx-3 card w-96 bg-base-100 shadow-xl">
+                    <div key={moment._id} className="mx-3 card w-96 bg-base-100 shadow-xl">
                         <figure><img src={moment.imageLink} alt={moment.title} /></figure>
-                        <div class="card-body">
-                            <h2 class="card-title">{moment.title}</h2>
+                        <div className="card-body">
+                            <h2 className="card-title">{moment.title}</h2>
                             <p>{moment.description}</p>
-                            <div class="card-actions justify-end">
-                                {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<button class="btn btn-primary">Edit Moment</button>) : (<></>)}
+                            <div className="card-actions justify-end">
+                                {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<button className="btn btn-primary">Delete Moment</button>) : (<></>)}
                             </div>
-                            <h2 class="card-title">{formatMonth(moment.month)} {formatDay(moment.day)} {moment.year}</h2>
+                            <h2 className="card-title">{formatMonth(moment.month)} {formatDay(moment.day)} {moment.year}</h2>
                         </div>
                     </div>
                     <div className='w-12'></div>
@@ -149,7 +154,7 @@ const Timeline = () => {
         <>
             <h2 className="mt-16 text-center text-4xl font-bold">{timeline.title}</h2>
             <div className="flex justify-end">
-                <button class="btn btn-primary inline mr-6">Add Moment</button>
+                <button className="btn btn-primary inline mr-6">Add Moment</button>
             </div>
                 
             <section id="timeline" className="overflow-x-scroll">

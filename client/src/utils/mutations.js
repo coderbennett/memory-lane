@@ -41,3 +41,12 @@ export const ADD_TIMELINE = gql`
     }
   }
 `;
+
+export const DELETE_TIMELINE = gql`
+  mutation deleteTimeline($timelineId: ID!) {
+    deleteTimeline(timelineId: $timelineId) {
+      _id
+      title
+    }
+  }
+`;

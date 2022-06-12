@@ -15,6 +15,9 @@ const resolvers = {
         },
         timelines: async () => {
             return await Timeline.find({});
+        },
+        userTimelines: async (parent, { author }) => {
+            return await Timeline.find({author: author});
         }   
     },
 
