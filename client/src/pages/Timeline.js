@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 
-import { Navigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
+import AddMoment from "../components/modals/AddMoment";
 
 import { QUERY_TIMELINE } from '../utils/queries';
 //we need to add the edit buttons here
@@ -16,13 +18,13 @@ const Timeline = () => {
         }
     );
 
+    let hasMoments = true;
+
     const timeline = data?.timeline || {};
     console.log(timeline);
 
-    if(!timeline.moments.length) {
-        return (
-            <h3 className="mt-6 text-center text-2xl font-bold">Oops! It Seems Like This Timeline Has No Moments Yet..</h3>
-        );
+    if(timeline.moments) {
+        hasMoments = false;
     }
 
     const formatDay = (day) => {
@@ -154,13 +156,17 @@ const Timeline = () => {
         <>
             <h2 className="mt-16 text-center text-4xl font-bold">{timeline.title}</h2>
             <div className="flex justify-end">
-                <button className="btn btn-primary inline mr-6">Add Moment</button>
+                {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<AddMoment timeline={timeline}/>) : (<></>)}
             </div>
                 
+            {hasMoments ? (
             <section id="timeline" className="overflow-x-scroll">
                 {renderMoments(false)}
                 {renderMoments(true)}
             </section>
+            ) : (
+                <h3 className="my-16 text-center text-2xl font-bold">Aww shucks! Looks like this Timeline doesn't have any moments yet..</h3>
+            )}
             
         </>
     )
