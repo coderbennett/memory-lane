@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
+import { Navigate } from 'react-router-dom';
 import { ADD_TIMELINE } from '../../utils/mutations';
 
 export default function CreateTimeline({ user }) {
@@ -33,6 +34,7 @@ export default function CreateTimeline({ user }) {
                     author: user.username
                 }
             });
+            window.location.assign('/dashboard/:' + user._id);
         } catch (e) {
             console.error(e);
         }

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Navigate, useParams, Link } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 
 import { QUERY_USER, QUERY_TIMELINES } from '../utils/queries';
+import { DELETE_TIMELINE } from '../utils/mutations';
 
 import CreateTimeline from "../components/modals/CreateTimeline";
 
@@ -11,23 +12,35 @@ import Auth from '../utils/auth';
 const Dashboard = () => {
     const { userId } = useParams();
 
-    console.log(userId);
+    const [deleteTimeline] = useMutation(DELETE_TIMELINE);
 
     let id = userId.substring(1);
-    console.log(id);
+
+    const handleDeleteBtn = async (event) => {
+        const { name } = event.target;
+        try {
+            const { data } = await deleteTimeline({
+                variables: { timelineId: name }
+            });
+
+            
+            window.location.assign('/dashboard/:' + id);
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
     const { loading, data } = useQuery(
         QUERY_USER, { variables: { userId: id } }
     );
 
     const user = data?.user || {};
-    console.log(user.username);
   
     const timelineResponse = useQuery(
         QUERY_TIMELINES, { variables: { author: user.username }}
     );
 
     const timelines = timelineResponse.data?.userTimelines || [];
-    console.log(timelines);
 
     if (Auth.loggedIn() && Auth.getUser().data._id !== id) {
         return <Navigate to={"/dashboard/:" + id } />;
@@ -70,6 +83,7 @@ const Dashboard = () => {
                                 <Link to={"/timeline/" + timeline._id}>
                                     <button className="btn btn-primary">View Timeline</button>
                                 </Link>
+                                <button className="btn btn-error hover:btn-warning" name={timeline._id} onClick={handleDeleteBtn}>Delete Timeline</button>
                             </div>
                         </div>
                     </div>
