@@ -29,10 +29,6 @@ export default function Header() {
                                 {!modal ? <Login setModal={setModal} /> : <Signup setModal={setModal} />}
                             </div>
                         </div>
-
-
-
-
                     </li>
                 </ul>
             </div>
