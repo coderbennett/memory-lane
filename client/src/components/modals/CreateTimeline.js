@@ -1,8 +1,11 @@
 import React from 'react';
 
-export default function CreateTimeline() {
+export default function CreateTimeline({ user }) {
+    return (
     <div>
-        <label for="my-modal-4" className="btn modal-button bg-primary">Login</label>
+        <div className="card-actions justify-end m-6">
+            <label for="my-modal-4" className="btn modal-button text-neutral bg-primary">Create New Timeline</label>
+        </div>
 
         <input type="checkbox" id="my-modal-4" className="modal-toggle" />
         <label for="my-modal-4" className="modal cursor-pointer">
@@ -27,4 +30,5 @@ export default function CreateTimeline() {
             </label>
         </label>
     </div>
+    );
 }

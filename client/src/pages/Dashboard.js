@@ -4,6 +4,8 @@ import { useQuery } from '@apollo/client';
 
 import { QUERY_USER } from '../utils/queries';
 
+import CreateTimeline from "../components/modals/CreateTimeline";
+
 import Auth from '../utils/auth';
 
 const Dashboard = () => {
@@ -42,12 +44,12 @@ const Dashboard = () => {
     return (
         <div className="flex flex-col mt-16">
             <h2 className="mt-8 text-center text-4xl font-bold">{user.username}'s Dashboard</h2>
-            <div class="card-actions justify-end">
-                <button class="btn btn-primary m-6">Create New Timeline</button>
-            </div>
+            <CreateTimeline user={user}/>
             {user.timelines.length ? (
                 <h3 className="mt-6 text-center text-2xl font-bold">Your Timelines</h3>
-            ) : (<></>)}
+            ) : (
+                <h3 className="mt-6 text-center text-2xl font-bold">Create a Timeline to See it Listed Below</h3>
+            )}
             <div className="flex justify-end">
             </div>
             {user.timelines &&
