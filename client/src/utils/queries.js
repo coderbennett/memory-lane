@@ -27,7 +27,11 @@ export const QUERY_USER = gql`
             username
             email
             password
-            timelines
+            timelines {
+              _id
+              title
+              description
+            }
         }
     }
 `;

@@ -11,7 +11,7 @@ export default function CreateTimeline() {
 
                 <div className="form-control ">
                     <div className="grid grid-cols-2">
-                        <label className="my-3  input-group input-group-vertical">
+                        <label className="my-3 input-group input-group-vertical">
                             <span className="py-1">Title</span>
                             <input type="text" placeholder="Timeline Title" className="input input-bordered" />
                         </label>

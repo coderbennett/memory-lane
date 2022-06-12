@@ -9,14 +9,22 @@ import Auth from '../utils/auth';
 const Dashboard = () => {
     const { userId } = useParams();
 
+    console.log(userId);
+
+    let id = userId.substring(1);
+    console.log(id);
     const { loading, data } = useQuery(
-        QUERY_USER, { variables: { userId: userId } }
+        QUERY_USER, { variables: { userId: id } }
     );
 
     const user = data?.user || {};
 
-    if (Auth.loggedIn() && Auth.getUser().data._id === userId) {
-        return <Navigate to="/dashboard/:userId" />;
+    if (Auth.loggedIn() && Auth.getUser().data._id !== id) {
+        return <Navigate to={"/dashboard/:" + id } />;
+    }
+
+    if (!Auth.loggedIn()) {
+        return <Navigate to={"/"} />;
     }
 
     if (loading) {
@@ -32,12 +40,16 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="flex flex-col">
-            <h2>{user.username}'s Dashboard</h2>
-            <h3>Your Timelines</h3>
+        <div className="flex flex-col mt-16">
+            <h2 className="mt-8 text-center text-4xl font-bold">{user.username}'s Dashboard</h2>
             <div class="card-actions justify-end">
-                                <button class="btn btn-primary">Create Timeline</button>
-                            </div>
+                <button class="btn btn-primary m-6">Create New Timeline</button>
+            </div>
+            {user.timelines.length ? (
+                <h3 className="mt-6 text-center text-2xl font-bold">Your Timelines</h3>
+            ) : (<></>)}
+            <div className="flex justify-end">
+            </div>
             {user.timelines &&
                 user.timelines.map((timeline) => (
                     <div className="card w-3/4 bg-base-100 shadow-xl">
