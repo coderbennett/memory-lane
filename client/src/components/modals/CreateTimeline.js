@@ -11,12 +11,12 @@ export default function CreateTimeline({ user }) {
     return (
     <div>
         <div className="card-actions justify-end m-6">
-            <label className="btn modal-button text-neutral bg-primary">Create New Timeline</label>
+            <label htmlFor="my-modal-4" className="btn modal-button text-neutral bg-primary">Create New Timeline</label>
         </div>
 
         <input type="checkbox" id="my-modal-4" className="modal-toggle" />
-        <label className="modal cursor-pointer">
-            <label className="modal-box relative">
+        <label htmlFor="my-modal-4" className="modal cursor-pointer">
+            <label className="modal-box relative" htmlFor="">
                 <h3 className="text-lg font-bold">Create Timeline</h3>
 
                 <div className="form-control ">

@@ -26,10 +26,6 @@ const Dashboard = () => {
         QUERY_TIMELINES, { variables: { author: user.username }}
     );
 
-    const navigateToTimeline = (timelineId) => {
-        return <Navigate to={"/timeline/:" + timelineId }/>
-    }
-
     const timelines = timelineResponse.data?.userTimelines || [];
     console.log(timelines);
 
@@ -66,13 +62,13 @@ const Dashboard = () => {
             </div>
             {timelines &&
                 timelines.map((timeline) => (
-                    <div className="mx-auto card w-3/4 bg-primary shadow-xl">
+                    <div key={timeline._id} className="mx-auto card w-3/4 bg-primary shadow-xl">
                     <h2 className="card-title m-6 text-center font-bold">{timeline.title}</h2>
                         <div className="card-body bg-base-100">
                             <p>{timeline.description}</p>
                             <div className="card-actions justify-end">
                                 <Link to={"/timeline/" + timeline._id}>
-                                    <button className="btn btn-primary" onClick={navigateToTimeline(timeline._id)}>View Timeline</button>
+                                    <button className="btn btn-primary">View Timeline</button>
                                 </Link>
                             </div>
                         </div>
