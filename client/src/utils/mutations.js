@@ -66,3 +66,11 @@ export const ADD_MOMENT = gql`
     }
   }
 `;
+
+export const DELETE_MOMENT = gql`
+  mutation deleteMoment($timelineId: ID!, $momentId: ID!) {
+    deleteMoment(timelineId: $timelineId, momentId: $momentId) {
+      _id
+    }
+  }
+`;

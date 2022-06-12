@@ -6,7 +6,9 @@ import { useParams } from 'react-router-dom';
 import AddMoment from "../components/modals/AddMoment";
 
 import { QUERY_TIMELINE } from '../utils/queries';
-//we need to add the edit buttons here
+import { DELETE_MOMENT } from '../utils/mutations';
+
+
 import Auth from '../utils/auth';
 
 const Timeline = () => {
@@ -18,10 +20,30 @@ const Timeline = () => {
         }
     );
 
+    const [deleteMoment] = useMutation(DELETE_MOMENT);
+
+    const handleDeleteBtn = async (event) => {
+        const { name } = event.target;
+
+        console.log(timelineId);
+        console.log(name);
+        try {
+            const { data } = await deleteMoment({
+                variables: { 
+                    timelineId: timelineId,
+                    momentId: name
+                }
+            });
+
+            window.location.assign('/timeline/' + timelineId);
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
     let hasMoments = true;
 
     const timeline = data?.timeline || {};
-    console.log(timeline);
 
     const formatDay = (day) => {
         switch (day) {
@@ -111,7 +133,7 @@ const Timeline = () => {
                                 <h2 className="card-title">{moment.title}</h2>
                                 <p>{moment.description}</p>
                                 <div className="card-actions justify-end">
-                                    {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<button className="btn btn-primary">Delete Moment</button>) : (<></>)}
+                                    {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<button className="btn btn-primary" name={moment._id} onClick={handleDeleteBtn}>Delete Moment</button>) : (<></>)}
                                 </div>
                                 <h2 className="card-title">{formatMonth(moment.month)} {formatDay(moment.day)} {moment.year}</h2>
                             </div>
@@ -130,7 +152,7 @@ const Timeline = () => {
                             <h2 className="card-title">{moment.title}</h2>
                             <p>{moment.description}</p>
                             <div className="card-actions justify-end">
-                                {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<button className="btn btn-primary">Delete Moment</button>) : (<></>)}
+                                {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<button name={moment._id} onClick={handleDeleteBtn} className="btn btn-primary">Delete Moment</button>) : (<></>)}
                             </div>
                             <h2 className="card-title">{formatMonth(moment.month)} {formatDay(moment.day)} {moment.year}</h2>
                         </div>
