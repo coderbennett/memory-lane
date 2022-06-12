@@ -23,10 +23,6 @@ const Timeline = () => {
     const timeline = data?.timeline || {};
     console.log(timeline);
 
-    if(timeline.moments) {
-        hasMoments = false;
-    }
-
     const formatDay = (day) => {
         switch (day) {
             case 1:
@@ -106,7 +102,7 @@ const Timeline = () => {
             <div className={`grid grid-row-1 gap-12 mt-16 border-b-2 pb-16 w-fit ${sCols}`}>
                 {!isEven ? (
                 <>    
-                    <div className='w-12'></div>
+                    <div key={'firstdiv'} className='w-12'></div>
                     {momentArray && momentArray.map((moment) => (
                     <>
                         <div key={moment._id} className="mx-3 card w-96 bg-base-100 shadow-xl">

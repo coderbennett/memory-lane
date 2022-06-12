@@ -8,7 +8,6 @@ export default function AddMoment({ timeline }) {
         title: '',
         description: '',
         imageLink: '',
-        description: '',
         year: 0
     });
 
@@ -20,14 +19,54 @@ export default function AddMoment({ timeline }) {
             numArray[i-1] = i;
         }
         return (
-            <select type="text" placeholder="4th" className="input input-bordered"> 
+            <select type="text" placeholder="4th" className="input input-bordered"  name="day" onChange={handleChange}> 
             {numArray.map((num) => <option key={num} value={num}>{num}</option>)}
             </select>
         )
     }
 
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormState({...formState, [name]: value});
+    };
+
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+
+        let { title, description, imageLink, year } = formState;
+        let month = 0;
+        let day = 0;
+        year = parseInt(year);
+
+        if(formState.month) {
+            month = parseInt(formState.month);
+            if(formState.day) {
+                day = parseInt(formState.day);
+            }
+        }
+
+        console.log(formState);
+        console.log(year);
+        console.log(month);
+        console.log(day);
+
+        try {
+            const { data } = await addMoment({
+                variables: {
+                    timelineId: timeline._id,
+                    title: title,
+                    description: description,
+                    imageLink: imageLink,
+                    year: year,
+                    month: month,
+                    day: day
+                }
+            });
+
+            window.location.assign('/timeline/' + timeline._id)
+        } catch (e) {
+            console.error(e);
+        }
     };
 
     return (
@@ -45,26 +84,26 @@ export default function AddMoment({ timeline }) {
                         <div className="grid grid-cols-2 gap-4">
                             <label className="my-3  input-group input-group-vertical">
                                 <span className="py-1">Title</span>
-                                <input type="text" placeholder="Independence Day" className="input input-bordered" />
+                                <input type="text" placeholder="Independence Day" className="input input-bordered" name="title" onChange={handleChange}/>
                             </label>
                             <label className="my-3  input-group input-group-vertical">
                                 <span className="py-1">Image Link</span>
-                                <input type="text" placeholder="image-of-freedom.com" className="input input-bordered" />
+                                <input type="text" placeholder="image-of-freedom.com" className="input input-bordered" name="imageLink" onChange={handleChange} />
                             </label>
 
                         </div>
                         <label className="my-3 input-group input-group-vertical">
-                            <span className="py-1">Description</span><textarea className="textarea textarea-bordered" placeholder="On July 4, 1776, the Second Continental Congress unanimously adopted the Declaration of Independence."></textarea>
+                            <span className="py-1">Description</span><textarea className="textarea textarea-bordered" placeholder="On July 4, 1776, the Second Continental Congress unanimously adopted the Declaration of Independence."  name="description" onChange={handleChange}></textarea>
                         </label>
 
                         <div className="grid-cols-3 grid">
                             <label className="my-3  input-group input-group-vertical">
                                 <span className="py-1">Year</span>
-                                <input type="text" placeholder="1776" className="input input-bordered" />
+                                <input type="text" placeholder="1776" className="input input-bordered"  name="year" onChange={handleChange}/>
                             </label>
                             <label className="my-3  input-group input-group-vertical">
                                 <span className="py-1">Month</span>
-                                <select  placeholder="July" className="input input-bordered"> 
+                                <select  placeholder="July" className="input input-bordered"  name="month" onChange={handleChange}> 
                                     <option value={1}>January</option>
                                     <option value={2}>February</option>
                                     <option value={3}>March</option>
