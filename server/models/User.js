@@ -19,8 +19,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
         minlength: 5
-    },
-    timelines: [Timeline.schema]
+    }
 });
 
 userSchema.pre('save', async function(next) {

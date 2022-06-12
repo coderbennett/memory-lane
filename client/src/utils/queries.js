@@ -20,6 +20,17 @@ export const QUERY_TIMELINE = gql`
       }
 `;
 
+export const QUERY_TIMELINES = gql`
+      query getTimelines($author: String!) {
+        userTimelines(author: $author) {
+          _id
+          title
+          description
+          author
+        }
+      }
+`;
+
 export const QUERY_USER = gql`
     query getUser($userId: ID!) {
         user(userId: $userId) {
@@ -27,11 +38,6 @@ export const QUERY_USER = gql`
             username
             email
             password
-            timelines {
-              _id
-              title
-              description
-            }
         }
     }
 `;

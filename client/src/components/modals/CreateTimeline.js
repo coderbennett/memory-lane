@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { ADD_TIMELINE } from '../../utils/mutations';
 
 export default function CreateTimeline({ user }) {
+
+    const [formState, setFormState] = useState({
+
+    })
+
     return (
     <div>
         <div className="card-actions justify-end m-6">
-            <label for="my-modal-4" className="btn modal-button text-neutral bg-primary">Create New Timeline</label>
+            <label className="btn modal-button text-neutral bg-primary">Create New Timeline</label>
         </div>
 
         <input type="checkbox" id="my-modal-4" className="modal-toggle" />
-        <label for="my-modal-4" className="modal cursor-pointer">
-            <label className="modal-box relative" for="">
+        <label className="modal cursor-pointer">
+            <label className="modal-box relative">
                 <h3 className="text-lg font-bold">Create Timeline</h3>
 
                 <div className="form-control ">
@@ -20,7 +27,7 @@ export default function CreateTimeline({ user }) {
                         </label>
                     </div>
                     <label className="my-3 input-group input-group-vertical">
-                        <span className="py-1">Description</span><textarea class="textarea textarea-bordered" placeholder="Write a little bit about your timeline here"></textarea>
+                        <span className="py-1">Description</span><textarea className="textarea textarea-bordered" placeholder="Write a little bit about your timeline here"></textarea>
                     </label>
 
                     <div className="flex flex-col">

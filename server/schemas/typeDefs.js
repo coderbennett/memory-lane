@@ -6,7 +6,6 @@ const typeDefs = gql`
         username: String
         email: String
         password: String
-        timelines: [Timeline]!
     }
 
     type Timeline {
@@ -37,6 +36,7 @@ const typeDefs = gql`
         timeline(timelineId: ID!): Timeline
         users: [User]
         timelines: [Timeline]
+        userTimelines(author: String!): [Timeline]
     }
 
     type Mutation {
