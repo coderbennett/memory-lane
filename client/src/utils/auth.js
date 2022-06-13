@@ -1,4 +1,6 @@
 import decode from 'jwt-decode';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class AuthService {
   getUser() {
@@ -11,13 +13,13 @@ class AuthService {
   }
 
   isTokenExpired(token) {
-      const decoded = decode(token);
-      if (decoded.exp < Date.now() / 1000) {
-        localStorage.removeItem('id_token');
-        return true;
-      }
-      
-      return false;
+    const decoded = decode(token);
+    if (decoded.exp < Date.now() / 1000) {
+      localStorage.removeItem('id_token');
+      return true;
+    }
+
+    return false;
   }
 
   getToken() {
@@ -26,6 +28,7 @@ class AuthService {
 
   login(idToken, userId) {
     localStorage.setItem('id_token', idToken);
+
 
     window.location.assign('/dashboard/:' + userId);
   }
