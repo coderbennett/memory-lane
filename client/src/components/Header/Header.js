@@ -4,7 +4,7 @@ import Login from "../modals/Login";
 import Signup from "../modals/Signup";
 import Auth from '../../utils/auth';
 import decode from 'jwt-decode';
-
+import Logo from "../../assets/logo.png"
 
 export default function Header() {
 
@@ -22,7 +22,7 @@ export default function Header() {
     return (
         <div className="navbar bg-primary fixed top-0 w-100 z-50">
             <div className="flex-1">
-                <a href="/" className="btn btn-ghost normal-case text-xl hover:bg-transparent">Memory Lane</a>
+                <a href="/"><img src={Logo} width="50%" alt="logo" /></a>
             </div>
             <div className="flex-none">
                 {loggedIn ?
