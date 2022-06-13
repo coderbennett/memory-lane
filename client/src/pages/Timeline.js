@@ -122,8 +122,8 @@ const Timeline = () => {
                             <>
                                 <div className="w-100 text-center mt-36">
                                 </div>
-                                <div className="w-0 border-4 mx-auto"></div>
-                                <div className="mr-24 card w-100 bg-base-100 shadow-xl">
+                                <div className="w-0 border-4 border-neutral mx-auto"></div>
+                                <div className="mr-24 card w-100 bg-secondary shadow-xl">
                                     <figure><img src={moment.imageLink} alt={moment.title} /></figure>
                                     <div className="card-body">
                                         <h2 className="card-title">{moment.title}</h2>
@@ -137,7 +137,7 @@ const Timeline = () => {
                             </>
                         ) : (
                             <>
-                                <div className="ml-16 card w-100 bg-base-100 shadow-xl">
+                                <div className="ml-16 bg-secondary card w-100 shadow-xl">
                                     <figure><img src={moment.imageLink} alt={moment.title} /></figure>
                                     <div className="card-body">
                                         <h2 className="card-title">{moment.title}</h2>
@@ -148,7 +148,7 @@ const Timeline = () => {
                                         <h2 className="card-title">{formatMonth(moment.month)} {formatDay(moment.day)} {moment.year}</h2>
                                     </div>
                                 </div>
-                                <div className="w-0 border-4 mx-auto"></div>
+                                <div className="w-0 border-4 border-neutral mx-auto"></div>
                                 <div className="w-100">
                                 </div>
                             </>
@@ -172,8 +172,8 @@ const Timeline = () => {
             <div className="flex flex-col">
                 {sortedMoments && sortedMoments.map((moment, i) => (
                     <div key={moment._id} className="grid grid-rows-1 mx-auto grid-cols-4">
-                        <div className="w-0 border-4"></div>
-                        <div key={moment._id} className="my-6 mx-auto card w-96 bg-base-100 shadow-xl col-span-3">
+                        <div className="w-0 border-4 border-neutral"></div>
+                        <div key={moment._id} className="my-6 mx-auto card w-96 bg-secondary shadow-xl col-span-3">
                             <figure><img src={moment.imageLink} alt={moment.title} /></figure>
                             <div className="card-body">
                                 <h2 className="card-title">{moment.title}</h2>
@@ -196,7 +196,7 @@ const Timeline = () => {
 
     return (
         <>
-            <h2 className="mt-16 text-center text-4xl font-bold">{timeline.title}</h2>
+            <h2 className="mt-24 text-center text-neutral text-4xl font-bold">{timeline.title}</h2>
             <div className="flex justify-between">
 
                 <label onClick={() => {

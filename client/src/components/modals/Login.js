@@ -49,7 +49,8 @@ export default function Login({ setModal }) {
 
             <h3 className="text-lg font-bold text-center">Login Here!</h3>
 
-            <div className="form-control">
+            <div className="form-control ">
+
                 <label className="my-3 input-group input-group-vertical">
                     <span className="py-1">Email</span>
                     <input type="email" name="email" id="email" onChange={handleChange} placeholder="email@domain.com" className="input input-bordered" />
@@ -65,7 +66,6 @@ export default function Login({ setModal }) {
                     <button onClick={() => { setModal(true) }} className="btn btn-primary">Signup</button>
                 </div>
             </div>
-
         </form>
     )
 }

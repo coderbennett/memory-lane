@@ -20,9 +20,9 @@ export default function Header() {
     }
 
     return (
-        <div className="navbar fixed top-0 w-100 z-50 bg-base-100">
+        <div className="navbar bg-primary fixed top-0 w-100 z-50">
             <div className="flex-1">
-                <a href="/" className="btn btn-ghost normal-case text-xl">Memory Lane</a>
+                <a href="/" className="btn btn-ghost normal-case text-xl hover:bg-transparent">Memory Lane</a>
             </div>
             <div className="flex-none">
                 {loggedIn ?
