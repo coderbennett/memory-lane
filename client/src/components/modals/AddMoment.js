@@ -8,7 +8,9 @@ export default function AddMoment({ timeline }) {
         title: '',
         description: '',
         imageLink: '',
-        year: 0
+        year: 0,
+        month: 1,
+        day: 1
     });
 
     const [addMoment, { error, data }] = useMutation(ADD_MOMENT);

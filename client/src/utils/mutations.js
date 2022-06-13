@@ -52,7 +52,7 @@ export const DELETE_TIMELINE = gql`
 `;
 
 export const ADD_MOMENT = gql`
-  mutation addMoment($timelineId: ID!, $title: String!, $description: String!, $imageLink: String!, $year: Int!, $month: Int!, $day: Int!) {
+  mutation addMoment($timelineId: ID!, $title: String!, $description: String!, $imageLink: String!, $year: Int!, $month: Int, $day: Int) {
     addMoment(timelineId: $timelineId, title: $title, description: $description, imageLink: $imageLink, year: $year, month: $month, day: $day) {
       _id
       moments {
