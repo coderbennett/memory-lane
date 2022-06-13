@@ -25,7 +25,7 @@ export default function Header() {
     }
 
     return (
-        <div className="navbar drop-shadow-2xl fixed top-0 w-100 z-50" style={headerStyle}>
+        <div className="navbar fixed top-0 w-100 z-50" style={headerStyle}>
             <div className="flex-1">
                 <a href="/"><img src={Logo} width="50%" alt="logo" /></a>
             </div>
