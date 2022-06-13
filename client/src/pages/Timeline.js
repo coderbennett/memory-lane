@@ -120,10 +120,10 @@ const Timeline = () => {
                     <div key={moment._id} className="grid grid-rows-1 grid-cols-3 mx-auto">
                         {i % 2 === 0 ? (
                             <>
-                                <div className="w-100 text-center mt-36">
+                                <div className="w-100 text-center mt-36 ">
                                 </div>
                                 <div className="w-0 border-4 border-neutral mx-auto"></div>
-                                <div className="mr-24 card w-100 bg-secondary shadow-xl">
+                                <div className="mr-24 card w-100 bg-secondary shadow-xl border border-zinc-900">
                                     <figure><img src={moment.imageLink} alt={moment.title} /></figure>
                                     <div className="card-body">
                                         <h2 className="card-title">{moment.title}</h2>
@@ -137,7 +137,7 @@ const Timeline = () => {
                             </>
                         ) : (
                             <>
-                                <div className="ml-16 bg-secondary card w-100 shadow-xl">
+                                <div className="ml-16 bg-secondary card w-100 shadow-xl border border-zinc-900">
                                     <figure><img src={moment.imageLink} alt={moment.title} /></figure>
                                     <div className="card-body">
                                         <h2 className="card-title">{moment.title}</h2>
@@ -173,7 +173,7 @@ const Timeline = () => {
                 {sortedMoments && sortedMoments.map((moment, i) => (
                     <div key={moment._id} className="grid grid-rows-1 mx-auto grid-cols-4">
                         <div className="w-0 border-4 border-neutral"></div>
-                        <div key={moment._id} className="my-6 mx-auto card w-96 bg-secondary shadow-xl col-span-3">
+                        <div key={moment._id} className="my-6 mx-auto card w-96 bg-secondary border border-zinc-900 shadow-xl col-span-3">
                             <figure><img src={moment.imageLink} alt={moment.title} /></figure>
                             <div className="card-body">
                                 <h2 className="card-title">{moment.title}</h2>
@@ -194,9 +194,21 @@ const Timeline = () => {
         return <div>Loading...</div>
     }
 
+    const fontStyle = {
+        fontFamily: "Indie Flower",
+    }
+    const underlineStyle = {
+        fontFamily: "Indie Flower",
+        background: "linear-gradient(to left, #f69ec4, #f9dd94 100%)",
+        backgroundPosition: "0 100%",
+        backgroundSize: "100% 2px",
+        backgroundRepeat: "repeat-x",
+        textDecoration: "none"
+    }
+
     return (
         <>
-            <h2 className="mt-24 text-center text-neutral text-4xl font-bold">{timeline.title}</h2>
+            <h2 className="mt-32 text-center text-neutral text-4xl font-bold" style={fontStyle}><u style={underlineStyle}>{timeline.title}</u></h2>
             <div className="flex justify-between">
 
                 <label onClick={() => {
