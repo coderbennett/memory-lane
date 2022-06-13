@@ -8,7 +8,9 @@ export default function AddMoment({ timeline }) {
         title: '',
         description: '',
         imageLink: '',
-        year: 0
+        year: 0,
+        month: 1,
+        day: 1
     });
 
     const [addMoment, { error, data }] = useMutation(ADD_MOMENT);
@@ -33,22 +35,7 @@ export default function AddMoment({ timeline }) {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        let { title, description, imageLink, year } = formState;
-        let month = 0;
-        let day = 0;
-        year = parseInt(year);
-
-        if(formState.month) {
-            month = parseInt(formState.month);
-            if(formState.day) {
-                day = parseInt(formState.day);
-            }
-        }
-
-        console.log(formState);
-        console.log(year);
-        console.log(month);
-        console.log(day);
+        let { title, description, imageLink, year, month, day } = formState;
 
         try {
             const { data } = await addMoment({
@@ -57,9 +44,9 @@ export default function AddMoment({ timeline }) {
                     title: title,
                     description: description,
                     imageLink: imageLink,
-                    year: year,
-                    month: month,
-                    day: day
+                    year: parseInt(year),
+                    month: parseInt(month),
+                    day: parseInt(day)
                 }
             });
 

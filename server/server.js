@@ -21,8 +21,11 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+app.get("*", (req, res) => {
+    let url = path.join(__dirname, '../client/build', 'index.html');
+    if (!url.startsWith('/app/'))
+      url = url.substring(1);
+    res.sendFile(url);
 });
 
 const startApolloServer = async (typeDefs, resolvers) => {
