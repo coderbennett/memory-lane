@@ -23,7 +23,7 @@ const Dashboard = () => {
                 variables: { timelineId: name }
             });
 
-            
+
             window.location.assign('/dashboard/:' + id);
         } catch (e) {
             console.error(e);
@@ -35,15 +35,15 @@ const Dashboard = () => {
     );
 
     const user = data?.user || {};
-  
+
     const timelineResponse = useQuery(
-        QUERY_TIMELINES, { variables: { author: user.username }}
+        QUERY_TIMELINES, { variables: { author: user.username } }
     );
 
     const timelines = timelineResponse.data?.userTimelines || [];
 
     if (Auth.loggedIn() && Auth.getUser().data._id !== id) {
-        return <Navigate to={"/dashboard/:" + id } />;
+        return <Navigate to={"/dashboard/:" + id} />;
     }
 
     if (!Auth.loggedIn()) {
@@ -62,10 +62,22 @@ const Dashboard = () => {
         )
     }
 
+    const fontStyle = {
+        fontFamily: "Indie Flower",
+    }
+    const underlineStyle = {
+        fontFamily: "Indie Flower",
+        background: "linear-gradient(to left, #f69ec4, #f9dd94 100%)",
+        backgroundPosition: "0 100%",
+        backgroundSize: "100% 2px",
+        backgroundRepeat: "repeat-x",
+        textDecoration: "none"
+    }
+
     return (
         <div className="flex flex-col mt-16">
-            <h2 className="mt-8 text-center text-4xl font-bold">{user.username}'s Dashboard</h2>
-            <CreateTimeline user={user}/>
+            <h2 className="mt-16 text-center text-4xl font-bold" style={fontStyle}><u style={underlineStyle}>{user.username}'s Dashboard</u></h2>
+            <CreateTimeline user={user} />
             {timelines.length ? (
                 <h3 className="my-6 text-center text-2xl font-bold">Your Timelines</h3>
             ) : (
@@ -75,8 +87,8 @@ const Dashboard = () => {
             </div>
             {timelines &&
                 timelines.map((timeline) => (
-                    <div key={timeline._id} className="mx-auto my-8 card w-3/4 bg-primary shadow-xl">
-                    <h2 className="card-title m-6 text-center font-bold">{timeline.title}</h2>
+                    <div key={timeline._id} className="mx-auto border border-zinc-900 my-8 card w-3/4 bg-primary shadow-xl">
+                        <h2 className="card-title m-6 text-center font-bold">{timeline.title}</h2>
                         <div className="card-body bg-base-100">
                             <p>{timeline.description}</p>
                             <div className="card-actions justify-end">
