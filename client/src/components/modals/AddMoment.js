@@ -44,9 +44,9 @@ export default function AddMoment({ timeline }) {
                     title: title,
                     description: description,
                     imageLink: imageLink,
-                    year: year,
-                    month: month,
-                    day: day
+                    year: parseInt(year),
+                    month: parseInt(month),
+                    day: parseInt(day)
                 }
             });
 
