@@ -33,22 +33,7 @@ export default function AddMoment({ timeline }) {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        let { title, description, imageLink, year } = formState;
-        let month = 0;
-        let day = 0;
-        year = parseInt(year);
-
-        if(formState.month) {
-            month = parseInt(formState.month);
-            if(formState.day) {
-                day = parseInt(formState.day);
-            }
-        }
-
-        console.log(formState);
-        console.log(year);
-        console.log(month);
-        console.log(day);
+        let { title, description, imageLink, year, month, day } = formState;
 
         try {
             const { data } = await addMoment({
