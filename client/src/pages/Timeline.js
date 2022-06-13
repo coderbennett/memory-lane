@@ -14,7 +14,6 @@ import Auth from '../utils/auth';
 
 const Timeline = () => {
     let width = useCurrentWidth();
-    console.log(width);
     let { lg } = useBreakpoints({
         lg: {min: 961, max: null}
     });
@@ -32,8 +31,6 @@ const Timeline = () => {
     const handleDeleteBtn = async (event) => {
         const { name } = event.target;
 
-        console.log(timelineId);
-        console.log(name);
         try {
             const { data } = await deleteMoment({
                 variables: { 
