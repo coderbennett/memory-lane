@@ -123,7 +123,7 @@ const Timeline = () => {
                                 <div className="w-100 text-center mt-36 ">
                                 </div>
                                 <div className="w-0 border-4 border-neutral mx-auto"></div>
-                                <div className="mr-24 card w-100 bg-secondary shadow-xl border border-zinc-900">
+                                <div className="mr-16 card w-100 bg-secondary shadow-xl border border-zinc-900">
                                     <figure><img src={moment.imageLink} alt={moment.title} /></figure>
                                     <div className="card-body">
                                         <h2 className="card-title">{moment.title}</h2>
