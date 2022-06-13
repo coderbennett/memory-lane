@@ -201,7 +201,7 @@ const Timeline = () => {
 
                 <label onClick={() => {
                     navigator.clipboard.writeText(window.location.href);
-                    toast.success("Copid to clipboard", {
+                    toast.success("Copied to clipboard!", {
                         position: "bottom-right",
                         autoClose: 5000,
                         hideProgressBar: false,
