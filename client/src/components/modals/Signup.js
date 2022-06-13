@@ -3,6 +3,8 @@ import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
 import { ADD_USER } from '../../utils/mutations.js';
 import decode from 'jwt-decode';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Signup({ setModal }) {
 
@@ -37,23 +39,23 @@ export default function Signup({ setModal }) {
             console.log(formState.input.password);
             console.log(formState.input.username);
 
-            const {username, email, password} = formState.input;
+            const { username, email, password } = formState.input;
 
             try {
                 const { data } = await addUser({
-                    variables: { 
+                    variables: {
                         username: username,
                         email: email,
                         password: password
                     },
                 });
-    
+
                 const token = data.addUser.token;
                 const decodeToken = decode(token);
                 const userId = decodeToken.data._id;
                 Auth.login(token, userId);
             } catch (e) {
-                console.error(e);
+
             }
         }
     };
@@ -65,12 +67,28 @@ export default function Signup({ setModal }) {
 
         if (!input.username) {
             isValid = false;
-            errors.username = "Please enter a username";
+            toast.error("Please enter a username", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined
+            });
         }
 
         if (!input.email) {
             isValid = false;
-            errors.email = "Please enter an email Address";
+            toast.error("Please enter an email", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined
+            });
         }
 
         if (typeof input.email !== "undefined") {
@@ -78,25 +96,57 @@ export default function Signup({ setModal }) {
             var pattern = new RegExp(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/);
             if (!pattern.test(input.email)) {
                 isValid = false;
-                errors.email = "Please enter valid email address";
+                toast.error("Please enter a valid email address", {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined
+                });
             }
         }
 
         if (!input.password) {
             isValid = false;
-            errors.password = "Please enter a password";
+            toast.error("please enter a valid password", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined
+            });
         }
 
         if (!input.confirm_password) {
             isValid = false;
-            errors.confirm_password = "Please confirm your password";
+            toast.error("Please confirm password", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined
+            });
         }
 
         if (typeof input.password !== "undefined" && typeof input.confirm_password !== "undefined") {
 
             if (input.password !== input.confirm_password) {
                 isValid = false;
-                errors.password = "Passwords don't match";
+                toast.error("Password does not match", {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined
+                });
             }
         }
 

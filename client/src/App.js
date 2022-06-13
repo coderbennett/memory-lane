@@ -2,6 +2,8 @@ import React from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Home from './pages/Home';
 import Timeline from './pages/Timeline';
@@ -41,14 +43,15 @@ function App() {
             <Route
               path="/"
               element={<Home />} />
-              <Route
-                path="/timeline/:timelineId"
-                element={<Timeline />} />
-              <Route
-                path="/dashboard/:userId"
-                element={<Dashboard />} />
+            <Route
+              path="/timeline/:timelineId"
+              element={<Timeline />} />
+            <Route
+              path="/dashboard/:userId"
+              element={<Dashboard />} />
           </Routes>
           <Footer />
+          <ToastContainer />
         </div>
       </Router>
     </ApolloProvider>
