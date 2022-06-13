@@ -50,7 +50,7 @@ function App() {
               path="/dashboard/:userId"
               element={<Dashboard />} />
           </Routes>
-          <Footer />
+          {/* <Footer /> */}
           <ToastContainer />
         </div>
       </Router>
