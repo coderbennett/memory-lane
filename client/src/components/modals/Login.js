@@ -4,10 +4,14 @@ import { Link } from 'react-router-dom';
 import { LOGIN } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 import decode from 'jwt-decode';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login({ setModal }) {
-    const [formState, setFormState] = useState({ email: '', password: ''});
+    const [formState, setFormState] = useState({ email: '', password: '' });
     const [login, { error }] = useMutation(LOGIN);
+
+
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -22,7 +26,15 @@ export default function Login({ setModal }) {
             const userId = decodeToken.data._id;
             Auth.login(token, userId);
         } catch (e) {
-            console.log(e);
+            toast.error("Invalid Login Credentials", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined
+            });
         }
     };
 
@@ -49,7 +61,7 @@ export default function Login({ setModal }) {
                 <div className="flex flex-row justify-center gap-4">
 
                     {/* if user is authenticated, send to dashboard */}
-                    <button type="submit" value="Submit"  className="btn btn-primary">Login</button>
+                    <button type="submit" value="Submit" className="btn btn-primary">Login</button>
                     <button onClick={() => { setModal(true) }} className="btn btn-primary">Signup</button>
                 </div>
             </div>
