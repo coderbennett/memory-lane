@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 
 import { useParams } from 'react-router-dom';
@@ -12,18 +12,21 @@ import { useBreakpoints, useCurrentWidth } from 'react-breakpoints-hook';
 
 import Auth from '../utils/auth';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Timeline = () => {
     let width = useCurrentWidth();
     let { lg } = useBreakpoints({
-        lg: {min: 961, max: null}
+        lg: { min: 961, max: null }
     });
 
     //grab the timeline id from the URL parameters
     const { timelineId } = useParams();
     //useQuery to query the timeline at the given ID
-    const { loading, data } = useQuery( QUERY_TIMELINE, {
-            variables: { timelineId: timelineId }
-        }
+    const { loading, data } = useQuery(QUERY_TIMELINE, {
+        variables: { timelineId: timelineId }
+    }
     );
 
     const [deleteMoment] = useMutation(DELETE_MOMENT);
@@ -33,7 +36,7 @@ const Timeline = () => {
 
         try {
             const { data } = await deleteMoment({
-                variables: { 
+                variables: {
                     timelineId: timelineId,
                     momentId: name
                 }
@@ -69,7 +72,7 @@ const Timeline = () => {
                 return day + 'th,'
         }
     };
-    
+
     const formatMonth = (month) => {
         switch (month) {
             case 1:
@@ -105,68 +108,68 @@ const Timeline = () => {
     const renderMoments = () => {
 
         let sortedMoments = [...timeline.moments];
-        if(sortedMoments !== []) {
+        if (sortedMoments !== []) {
             sortedMoments = sortedMoments.sort((a, b) => {
                 return a.year - b.year || a.month - b.month || a.day - b.day;
             })
         }
 
         return (
-            <div className="flex flex-col justify-center">  
+            <div className="flex flex-col justify-center">
                 {sortedMoments && sortedMoments.map((moment, i) => (
-                    <div key={moment._id} className="grid grid-rows-1 grid-cols-3 mx-auto"> 
-                    {i % 2 === 0 ? ( 
-                        <>
-                            <div className="w-100 text-center mt-36">
-                            </div>
-                            <div className="w-0 border-4 mx-auto"></div>
-                            <div className="mr-24 card w-100 bg-base-100 shadow-xl">
-                                <figure><img src={moment.imageLink} alt={moment.title} /></figure>
-                                <div className="card-body">
-                                    <h2 className="card-title">{moment.title}</h2>
-                                    <p>{moment.description}</p>
-                                    <div className="card-actions justify-end">
-                                        {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<button className="btn btn-error hover:btn-warning" name={moment._id} onClick={handleDeleteBtn}>Delete Moment</button>) : (<></>)}
-                                    </div>
-                                    <h2 className="card-title">{formatMonth(moment.month)} {formatDay(moment.day)} {moment.year}</h2>
+                    <div key={moment._id} className="grid grid-rows-1 grid-cols-3 mx-auto">
+                        {i % 2 === 0 ? (
+                            <>
+                                <div className="w-100 text-center mt-36">
                                 </div>
-                            </div>
-                        </>
-                    ):( 
-                        <>
-                            <div className="ml-16 card w-100 bg-base-100 shadow-xl">
-                                <figure><img src={moment.imageLink} alt={moment.title} /></figure>
-                                <div className="card-body">
-                                    <h2 className="card-title">{moment.title}</h2>
-                                    <p>{moment.description}</p>
-                                    <div className="card-actions justify-end">
-                                        {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<button className="btn btn-error hover:btn-warning" name={moment._id} onClick={handleDeleteBtn}>Delete Moment</button>) : (<></>)}
+                                <div className="w-0 border-4 mx-auto"></div>
+                                <div className="mr-24 card w-100 bg-base-100 shadow-xl">
+                                    <figure><img src={moment.imageLink} alt={moment.title} /></figure>
+                                    <div className="card-body">
+                                        <h2 className="card-title">{moment.title}</h2>
+                                        <p>{moment.description}</p>
+                                        <div className="card-actions justify-end">
+                                            {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<button className="btn btn-error hover:btn-warning" name={moment._id} onClick={handleDeleteBtn}>Delete Moment</button>) : (<></>)}
+                                        </div>
+                                        <h2 className="card-title">{formatMonth(moment.month)} {formatDay(moment.day)} {moment.year}</h2>
                                     </div>
-                                    <h2 className="card-title">{formatMonth(moment.month)} {formatDay(moment.day)} {moment.year}</h2>
                                 </div>
-                            </div>
-                            <div className="w-0 border-4 mx-auto"></div>
-                            <div className="w-100">
-                            </div>
-                        </>
+                            </>
+                        ) : (
+                            <>
+                                <div className="ml-16 card w-100 bg-base-100 shadow-xl">
+                                    <figure><img src={moment.imageLink} alt={moment.title} /></figure>
+                                    <div className="card-body">
+                                        <h2 className="card-title">{moment.title}</h2>
+                                        <p>{moment.description}</p>
+                                        <div className="card-actions justify-end">
+                                            {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<button className="btn btn-error hover:btn-warning" name={moment._id} onClick={handleDeleteBtn}>Delete Moment</button>) : (<></>)}
+                                        </div>
+                                        <h2 className="card-title">{formatMonth(moment.month)} {formatDay(moment.day)} {moment.year}</h2>
+                                    </div>
+                                </div>
+                                <div className="w-0 border-4 mx-auto"></div>
+                                <div className="w-100">
+                                </div>
+                            </>
                         )}
                     </div>
-                    ))}
-                </div>
-                )
+                ))}
+            </div>
+        )
     };
 
     const renderMobileMoments = () => {
 
         let sortedMoments = [...timeline.moments];
-        if(sortedMoments !== []) {
+        if (sortedMoments !== []) {
             sortedMoments = sortedMoments.sort((a, b) => {
                 return a.year - b.year || a.month - b.month || a.day - b.day;
             })
         }
 
         return (
-            <div className="flex flex-col">  
+            <div className="flex flex-col">
                 {sortedMoments && sortedMoments.map((moment, i) => (
                     <div key={moment._id} className="grid grid-rows-1 mx-auto grid-cols-4">
                         <div className="w-0 border-4"></div>
@@ -185,8 +188,8 @@ const Timeline = () => {
                 ))}
             </div>)
     }
-                    
-    
+
+
     if (loading) {
         return <div>Loading...</div>
     }
@@ -194,26 +197,40 @@ const Timeline = () => {
     return (
         <>
             <h2 className="mt-16 text-center text-4xl font-bold">{timeline.title}</h2>
-            <div className="flex justify-end">
-                {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<AddMoment timeline={timeline}/>) : (<></>)}
+            <div className="flex justify-between">
+
+                <label onClick={() => {
+                    navigator.clipboard.writeText(window.location.href);
+                    toast.success("Copid to clipboard", {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: undefined
+                    });
+                }
+                } className="btn m-6 text-black modal-button bg-primary hover:bg-secondary">Share timeline</label>
+                {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<AddMoment timeline={timeline} />) : (<></>)}
             </div>
-                
+
             {hasMoments ? (
-            <section id="timeline">
-                {lg ? (
-                    <>
-                        {renderMoments()}
-                    </>
-                ) : (
-                    <>
-                        {renderMobileMoments()}
-                    </>
-                )}
-            </section>
+                <section id="timeline">
+                    {lg ? (
+                        <>
+                            {renderMoments()}
+                        </>
+                    ) : (
+                        <>
+                            {renderMobileMoments()}
+                        </>
+                    )}
+                </section>
             ) : (
                 <h3 className="my-16 text-center text-2xl font-bold">Aww shucks! Looks like this Timeline doesn't have any moments yet..</h3>
             )}
-            
+
         </>
     )
 };
