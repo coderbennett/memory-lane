@@ -19,7 +19,6 @@ export default function Login({ setModal }) {
             const { data } = await login({
                 variables: { email: formState.email, password: formState.password }
             });
-            console.log(data);
 
             const token = data.login.token;
             const decodeToken = decode(token);
