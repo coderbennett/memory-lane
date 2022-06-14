@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { Link } from 'react-router-dom';
 import { LOGIN } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 import decode from 'jwt-decode';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login({ setModal }) {
     const [formState, setFormState] = useState({ email: '', password: '' });
     const [login, { error }] = useMutation(LOGIN);
-
-
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -34,14 +31,13 @@ export default function Login({ setModal }) {
                 draggable: true,
                 progress: undefined
             });
-        }
+        };
     };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormState({ ...formState, [name]: value });
     };
-
 
     return (
         <form onSubmit={handleFormSubmit} className="loginmodal">
@@ -66,5 +62,5 @@ export default function Login({ setModal }) {
                 </div>
             </div>
         </form>
-    )
+    );
 }
