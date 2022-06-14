@@ -2,7 +2,7 @@
 ![jsBadge](https://img.shields.io/github/languages/top/coderbennett/memory-lane)
 ![languages](https://img.shields.io/github/languages/count/coderbennett/memory-lane)
 ![License](https://img.shields.io/github/license/coderbennett/memory-lane)
-![Memory Lane Banner](client\src\assets\memoryLaneBanner.png)
+![Memory Lane Banner](client/src/assets/memoryLaneBanner.png)
 
 *Moments in Time, All in One Place*
 
@@ -23,17 +23,17 @@ To use our web app, you should start by visiting the site <a href="https://the-m
 
 When you enter the site you will be greeted by a hero image with some details on our site. From our homepage you can navigate to three user timelines which already have been populated with some moments. This is a great place to start so you can view what a potential timeline would look like.
 
-![Gif of homepage and a personal timeline](client\src\assets\homepage.gif)
+![Gif of homepage and a personal timeline](client/src/assets/homepage.gif)
 
 Once you have gotten a look at what a timeline can be, you should signup by clicking the LOGIN button located on the navigation bar. A modal will pop up and if you click sign up you can create an account.
 
 Once you have created an account you will be redirected to a dashboard page. On the dashboard page you can create a new timeline to get started.
 
-![Gif of dashboard and creating a timeline](client\src\assets\dashboard.gif)
+![Gif of dashboard and creating a timeline](client/src/assets/dashboard.gif)
 
 Once you have created a timeline you can get started by adding moments to the timeline! Make sure to fill out all the fields and remember the image link section is for a link to an image on the web!
 
-![Gif of user adding a moment to a timeline](client\src\assets\timeline.gif)
+![Gif of user adding a moment to a timeline](client/src/assets/timeline.gif)
 
 To delete a moment, simply click the delete moment button on the moment card. Please be warned that this is permanent and you will need to completely recreate it if you want to undo it.
 
