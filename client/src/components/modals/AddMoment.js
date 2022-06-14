@@ -4,6 +4,8 @@ import { ADD_MOMENT } from '../../utils/mutations';
 
 export default function AddMoment({ timeline }) {
 
+    //here we are creating a state for the add moment form with
+    //some default values
     const [formState, setFormState] = useState({
         title: '',
         description: '',
@@ -13,8 +15,11 @@ export default function AddMoment({ timeline }) {
         day: 1
     });
 
-    const [addMoment, { error, data }] = useMutation(ADD_MOMENT);
+    //here we are including the addmoment mutation so we can use it shortly
+    const [addMoment] = useMutation(ADD_MOMENT);
 
+    //we call this function with the day select element to populate
+    //the days of the month
     const renderDayOptions = () => {
         let numArray = [];
         for(let i = 1; i < 32; i++) {
@@ -27,18 +32,25 @@ export default function AddMoment({ timeline }) {
         )
     }
 
+    //this handleChange function runs everytime there is a change to the addMoment form inputs
+    //it updates our formState to have the value the user entered by targeting the name property
+    //on the element
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormState({...formState, [name]: value});
     };
 
+    //when we click submit this function runs and adds the moment to the database (timeline)
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
+        //we use object destructuring to grab all the data from the formState
         let { title, description, imageLink, year, month, day } = formState;
 
+        //now we try to add the moment to the database and reload the page if it works
+        //otherwise we send the error to the console
         try {
-            const { data } = await addMoment({
+            await addMoment({
                 variables: {
                     timelineId: timeline._id,
                     title: title,
@@ -56,6 +68,9 @@ export default function AddMoment({ timeline }) {
         }
     };
 
+    //the below return returns our modal - the modal is pretty standard
+    //we have our add moment button at the top which is always on display
+    //clicking this button will open the modal
     return (
         <div>
             <div className="card-actions justify-end m-6">
