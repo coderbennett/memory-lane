@@ -2,14 +2,13 @@ import React from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Home from './pages/Home';
 import Timeline from './pages/Timeline';
 import Dashboard from './pages/Dashboard';
 import Header from '../src/components/Header/Header';
-import Footer from '../src/components/Footer/Footer';
 
 
 const httpLink = createHttpLink({
@@ -32,7 +31,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-
 function App() {
   return (
     <ApolloProvider client={client}>
@@ -50,7 +48,6 @@ function App() {
               path="/dashboard/:userId"
               element={<Dashboard />} />
           </Routes>
-          {/* <Footer /> */}
           <ToastContainer />
         </div>
       </Router>
