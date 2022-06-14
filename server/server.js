@@ -21,6 +21,10 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
+//we are using this middleware to tell the server
+//to direct all url routes to the index then to navigate
+//to the page from there to work with react router dom 
+//(otherwise links don't work - only relational movements across pages would)
 app.get("*", (req, res) => {
     let url = path.join(__dirname, '../client/build', 'index.html');
     if (!url.startsWith('/app/'))
