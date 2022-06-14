@@ -2,6 +2,7 @@
 ![jsBadge](https://img.shields.io/github/languages/top/coderbennett/memory-lane)
 ![languages](https://img.shields.io/github/languages/count/coderbennett/memory-lane)
 ![License](https://img.shields.io/github/license/coderbennett/memory-lane)
+
 ![Memory Lane Banner](client/src/assets/memoryLaneBanner.png)
 
 *Moments in Time, All in One Place*
