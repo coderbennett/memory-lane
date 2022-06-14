@@ -14,15 +14,13 @@ export default function Header() {
 
     if (Auth.getToken()) {
         curToken = decode(Auth.getToken());
-        console.log(curToken.data);
         loggedIn = true;
-        console.log("Logged in status: ", loggedIn);
-    }
+    };
 
     const headerStyle = {
         backgroundColor: "rgba(250,229,201,1)",
         borderBottom: "1px solid #A45771",
-    }
+    };
 
     return (
         <div className="navbar fixed top-0 w-100 z-50" style={headerStyle}>
@@ -39,6 +37,7 @@ export default function Header() {
                     </ul>
 
                     : <ul className="menu menu-horizontal gap-4 p-0">
+
                         {/* login/signup modal */}
                         <li>
                             <label htmlFor="my-modal-1" className="btn modal-button bg-primary hover:bg-secondary">Login</label>
@@ -50,8 +49,6 @@ export default function Header() {
 
                                     {/* conditonally change between login and signup modal */}
                                     {!modal ? <Login setModal={setModal} /> : <Signup setModal={setModal} />}
-
-
                                 </div>
                             </div>
                         </li>

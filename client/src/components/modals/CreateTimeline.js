@@ -1,33 +1,37 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { Navigate } from 'react-router-dom';
 import { ADD_TIMELINE } from '../../utils/mutations';
 
 export default function CreateTimeline({ user }) {
 
+    //here we set up the formState for the modal form
     const [formState, setFormState] = useState({
         title: '',
         description: ''
     });
 
-    const [addTimeline, { error, data }] = useMutation(ADD_TIMELINE);
+    //here we are grabbing the addtimeline mutation to use shortly
+    const [addTimeline] = useMutation(ADD_TIMELINE);
 
+    //this handlechange function gets called on change for the inputs
+    //it grabs the elements name and value properties and sets the
+    //form state to it (along with the formState's other values)
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormState({ ...formState, [name]: value });
     };
 
+    //our handleformsubmit function gets called when we submit the form (create timeline)
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
+        //we pull the title and description from the formstate with object desctructuring
         const { title, description } = formState;
 
-        console.log(formState);
-        console.log(title);
-        console.log(description);
-        console.log(user.username);
+        //now we try to add a timeline to the database and reload the page
+        //if it doesnt work we send an error to the console
         try {
-            const { data } = await addTimeline({
+            await addTimeline({
                 variables: {
                     title: title,
                     description: description,
@@ -40,6 +44,7 @@ export default function CreateTimeline({ user }) {
         }
     }
 
+    //the below return statement has the JSX for our modal element as well as the button that toggles the modal
     return (
         <form onSubmit={handleFormSubmit}>
             <div className="card-actions justify-end m-6">
