@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
 import { ADD_USER } from '../../utils/mutations.js';
 import decode from 'jwt-decode';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Signup({ setModal }) {
@@ -30,14 +30,7 @@ export default function Signup({ setModal }) {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        console.log(formState);
-        console.log(formState.input);
-
         if (validate()) {
-            console.log(formState);
-            console.log(formState.input.email);
-            console.log(formState.input.password);
-            console.log(formState.input.username);
 
             const { username, email, password } = formState.input;
 
@@ -76,7 +69,7 @@ export default function Signup({ setModal }) {
                 draggable: true,
                 progress: undefined
             });
-        }
+        };
 
         if (!input.email) {
             isValid = false;
@@ -89,7 +82,7 @@ export default function Signup({ setModal }) {
                 draggable: true,
                 progress: undefined
             });
-        }
+        };
 
         if (typeof input.email !== "undefined") {
 
@@ -105,8 +98,8 @@ export default function Signup({ setModal }) {
                     draggable: true,
                     progress: undefined
                 });
-            }
-        }
+            };
+        };
 
         if (!input.password) {
             isValid = false;
@@ -119,7 +112,7 @@ export default function Signup({ setModal }) {
                 draggable: true,
                 progress: undefined
             });
-        }
+        };
 
         if (!input.confirm_password) {
             isValid = false;
@@ -132,7 +125,7 @@ export default function Signup({ setModal }) {
                 draggable: true,
                 progress: undefined
             });
-        }
+        };
 
         if (typeof input.password !== "undefined" && typeof input.confirm_password !== "undefined") {
 
@@ -147,17 +140,15 @@ export default function Signup({ setModal }) {
                     draggable: true,
                     progress: undefined
                 });
-            }
-        }
+            };
+        };
 
         setFormState({
             input: input, errors: errors
         });
 
-        console.log(isValid);
         return isValid;
     };
-
 
     return (
         <form onSubmit={handleFormSubmit} className="signupModal">
@@ -192,7 +183,6 @@ export default function Signup({ setModal }) {
                     <button onClick={() => { setModal(false) }} className="btn btn-primary">Back to Login</button>
                 </div>
             </div>
-
         </form>
-    )
-}
+    );
+};
