@@ -1,3 +1,4 @@
+// importing essential files
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Login from "../modals/Login";
@@ -8,15 +9,20 @@ import Logo from "../../assets/logo.png"
 
 export default function Header() {
 
+    // we declare a setModal state in order to dynamically switch between login and signup forms within the same modal
     const [modal, setModal] = useState(false);
+
+    // starts the user as a not logged in
     let loggedIn = false;
     let curToken = "";
 
+    // checks to see if there are any tokens and if so decode the token and set the logged in variable to true.
     if (Auth.getToken()) {
         curToken = decode(Auth.getToken());
         loggedIn = true;
     };
 
+    // creating a css style for our header
     const headerStyle = {
         backgroundColor: "rgba(250,229,201,1)",
         borderBottom: "1px solid #A45771",
@@ -28,6 +34,8 @@ export default function Header() {
                 <a href="/"><img src={Logo} width="50%" alt="logo" /></a>
             </div>
             <div className="flex-none">
+
+                {/* checks if there is a user logged in or not. If it is true, render dashboard and logout button. If it is false, render login button */}
                 {loggedIn ?
                     <ul className="menu menu-horizontal gap-4 p-0">
                         <li><Link to={`/dashboard/:${curToken.data._id}`}>Dashboard</Link></li>
