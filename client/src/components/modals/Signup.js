@@ -1,3 +1,4 @@
+// importing essential files
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
@@ -8,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Signup({ setModal }) {
 
+    // creates a form state that saves the user input
     const [formState, setFormState] = useState({
         input: {
             username: '',
@@ -17,8 +19,10 @@ export default function Signup({ setModal }) {
         }, errors: {}
     });
 
+    // sets addUser to use the add_user mutation
     const [addUser, { error, data }] = useMutation(ADD_USER);
 
+    // grabs the changed value of the text box and set the formstate accordingly to the new changed value
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormState({
@@ -27,13 +31,16 @@ export default function Signup({ setModal }) {
         });
     };
 
+    // we have a handler for form submit and we attempt to log in using the form state values.
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
+        // checks to see validate returns true or false
         if (validate()) {
 
             const { username, email, password } = formState.input;
 
+            // create a new user using the formstate values and then authenticate them
             try {
                 const { data } = await addUser({
                     variables: {
@@ -53,11 +60,13 @@ export default function Signup({ setModal }) {
         }
     };
 
+    // we have a function to valudate if the user has inputted acceptable values into the fields
     const validate = () => {
         let input = formState.input;
         let errors = {};
         let isValid = true;
 
+        // checks if username is empty
         if (!input.username) {
             isValid = false;
             toast.error("Please enter a username", {
@@ -71,6 +80,7 @@ export default function Signup({ setModal }) {
             });
         };
 
+        // checks if the email box is empty
         if (!input.email) {
             isValid = false;
             toast.error("Please enter an email", {
@@ -84,6 +94,7 @@ export default function Signup({ setModal }) {
             });
         };
 
+        // checks to see if the email follows an appropriate format
         if (typeof input.email !== "undefined") {
 
             var pattern = new RegExp(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/);
@@ -101,6 +112,7 @@ export default function Signup({ setModal }) {
             };
         };
 
+        // checks to see if the password box is empty
         if (!input.password) {
             isValid = false;
             toast.error("please enter a valid password", {
@@ -114,6 +126,7 @@ export default function Signup({ setModal }) {
             });
         };
 
+        // checks to see if confirm password box is empty
         if (!input.confirm_password) {
             isValid = false;
             toast.error("Please confirm password", {
@@ -127,8 +140,10 @@ export default function Signup({ setModal }) {
             });
         };
 
+        // checks to see if both password and confirm password are not undefined
         if (typeof input.password !== "undefined" && typeof input.confirm_password !== "undefined") {
 
+            // checks to see if password and confirm password have the same values
             if (input.password !== input.confirm_password) {
                 isValid = false;
                 toast.error("Password does not match", {
@@ -143,10 +158,12 @@ export default function Signup({ setModal }) {
             };
         };
 
+        // sets the values of the form into the formstate
         setFormState({
             input: input, errors: errors
         });
 
+        // if all the validations pass, return true. if not, return false
         return isValid;
     };
 
