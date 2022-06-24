@@ -60,11 +60,11 @@ export default function EditMoment({ timeline, momentId }) {
     return (
         <div>
             <div className="card-actions justify-end">
-                <label htmlFor="my-modal-2" className="btn modal-button bg-primary hover:bg-secondary text-black">Edit Moment</label>
+                <label htmlFor="my-modal-3" className="btn modal-button bg-primary hover:bg-secondary text-black">Edit Moment</label>
             </div>
 
-            <input type="checkbox" id="my-modal-2" className="modal-toggle" />
-            <label htmlFor="my-modal-2" className="modal cursor-pointer">
+            <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+            <label htmlFor="my-modal-3" className="modal cursor-pointer">
                 <label className="modal-box relative" htmlFor="">
                     <h3 className="text-lg font-bold text-center">Edit Moment</h3>
 
@@ -112,7 +112,7 @@ export default function EditMoment({ timeline, momentId }) {
                             </label>
                         </div>
                         <div className="flex flex-col">
-                            <button type="submit" className="btn btn-primary ">Add Moment</button>
+                            <button type="submit" className="btn btn-primary ">Edit Moment</button>
                         </div>
                     </form>
                 </label>
