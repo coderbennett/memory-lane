@@ -67,6 +67,22 @@ export const ADD_MOMENT = gql`
   }
 `;
 
+export const EDIT_MOMENT = gql`
+  mutation editMoment($timelineId: ID!, $title: String!, $description: String!, $imageLink: String!, $year: Int!, $month: Int, $day: Int) {
+    editMoment(timelineId: $timelineId, title: $title, description: $description, imageLink: $imageLink, year: $year, month: $month, day: $day) {
+      _id
+      moments {
+        _id
+        description
+        imageLink
+        year
+        month
+        day
+      }
+    }
+  }
+`;
+
 export const DELETE_MOMENT = gql`
   mutation deleteMoment($timelineId: ID!, $momentId: ID!) {
     deleteMoment(timelineId: $timelineId, momentId: $momentId) {

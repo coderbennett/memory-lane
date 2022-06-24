@@ -2,6 +2,7 @@ import React from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import AddMoment from "../components/modals/AddMoment";
+import EditMoment from "../components/modals/EditMoment";
 import { QUERY_TIMELINE } from '../utils/queries';
 import { DELETE_MOMENT } from '../utils/mutations';
 import { useBreakpoints} from 'react-breakpoints-hook';
@@ -113,6 +114,20 @@ const Timeline = () => {
         }
     }
 
+    const checkImage = (imgLink) => {
+        console.log(imgLink);
+        fetch(imgLink)
+            .then((res) => {
+                console.log("res: "+res);
+                if (res.status === 200){
+                    return true;
+                }
+                else {
+                    return false;
+                }
+        });
+    }
+
     // this function renders the (desktop/web view) moments
     const renderMoments = () => {
 
@@ -153,16 +168,23 @@ const Timeline = () => {
 
                                 {/*this is the parent div for our even card*/}
                                 <div className="mr-16 card w-100 bg-secondary shadow-xl border border-zinc-900">
-                                    <figure><img src={moment.imageLink} alt={moment.title} /></figure>
+                                    {checkImage(moment.imageLink) ? (
+                                        <figure><img src={moment.imageLink} alt={moment.title} /></figure>
+                                    ) : 
+                                    (<></>)
+                                    }
 
                                     <div className="card-body">
                                         <h2 className="card-title">{moment.title}</h2>
                                         <p>{moment.description}</p>
+                                        {/*Here we are using verifying the user is logged in and the author so they can
+                                        delete moments if they want */}
+                                        {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (
                                         <div className="card-actions justify-end">
-                                            {/*Here we are using verifying the user is logged in and the author so they can
-                                            delete moments if they want */}
-                                            {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<button className="btn btn-error hover:btn-warning" name={moment._id} onClick={handleDeleteBtn}>Delete Moment</button>) : (<></>)}
+                                            <EditMoment timeline={timeline} momentId={moment._id}/>
+                                            <button className="btn btn-error hover:btn-warning" name={moment._id} onClick={handleDeleteBtn}>Delete Moment</button>
                                         </div>
+                                        ) : (<></>)}
                                         <h2 className="card-title">{formatMonth(moment.month)} {formatDay(moment.day)} {moment.year}</h2>
                                     </div>
 
@@ -172,16 +194,23 @@ const Timeline = () => {
                             <>
                                 {/*this is the parent div for our odd card*/}
                                 <div className="ml-16 bg-secondary card w-100 shadow-xl border border-zinc-900">
-                                    <figure><img src={moment.imageLink} alt={moment.title} /></figure>
+                                    {checkImage(moment.imageLink) ? (
+                                        <figure><img src={moment.imageLink} alt={moment.title} /></figure>
+                                    ) : 
+                                    (<></>)
+                                    }
 
                                     <div className="card-body">
                                         <h2 className="card-title">{moment.title}</h2>
                                         <p>{moment.description}</p>
+                                        {/*Here we are using verifying the user is logged in and the author so they can
+                                        delete moments if they want */}
+                                        {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (
                                         <div className="card-actions justify-end">
-                                            {/*Here we are using verifying the user is logged in and the author so they can
-                                            delete moments if they want */}
-                                            {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<button className="btn btn-error hover:btn-warning" name={moment._id} onClick={handleDeleteBtn}>Delete Moment</button>) : (<></>)}
+                                            <EditMoment timeline={timeline} momentId={moment._id}/>
+                                            <button className="btn btn-error hover:btn-warning" name={moment._id} onClick={handleDeleteBtn}>Delete Moment</button>
                                         </div>
+                                        ) : (<></>)}
                                         <h2 className="card-title">{formatMonth(moment.month)} {formatDay(moment.day)} {moment.year}</h2>
                                     </div>
 
@@ -222,17 +251,24 @@ const Timeline = () => {
 
                         <div className="w-0 border-4 border-neutral ml-8">{/*this is the timeline line*/}</div>
 
-                        <div key={moment._id} className="my-6 mx-3 card w-fit bg-secondary border border-zinc-900 shadow-xl col-span-3">
-                            <figure><img src={moment.imageLink} alt={moment.title} /></figure>
+                        <div key={moment._id} className="my-6 mx-3 card w-fit bg-secondary border border-zinc-900 shadow-xl col-span-3">  
+                            {checkImage(moment.imageLink) ? (
+                                            <figure><img src={moment.imageLink} alt={moment.title} /></figure>
+                                        ) : 
+                                        (<></>)
+                                        }
 
                             <div className="card-body">
                                 <h2 className="card-title">{moment.title}</h2>
                                 <p>{moment.description}</p>
+                                {/*Here we are using verifying the user is logged in and the author so they can
+                                delete moments if they want */}
+                                {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (
                                 <div className="card-actions justify-end">
-                                    {/*Here we are using verifying the user is logged in and the author so they can
-                                    delete moments if they want */}
-                                    {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (<button className="btn btn-error hover:btn-warning" name={moment._id} onClick={handleDeleteBtn}>Delete Moment</button>) : (<></>)}
+                                    <EditMoment timeline={timeline} momentId={moment._id}/>
+                                    <button className="btn btn-error hover:btn-warning" name={moment._id} onClick={handleDeleteBtn}>Delete Moment</button>
                                 </div>
+                                ) : (<></>)}
                                 <h2 className="card-title">{formatMonth(moment.month)} {formatDay(moment.day)} {moment.year}</h2>
                             </div>
 
