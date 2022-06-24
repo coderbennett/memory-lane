@@ -59,7 +59,7 @@ export default function EditMoment({ timeline, momentId }) {
 
     return (
         <div>
-            <div className="card-actions justify-end m-6">
+            <div className="card-actions justify-end">
                 <label htmlFor="my-modal-2" className="btn modal-button bg-primary hover:bg-secondary text-black">Edit Moment</label>
             </div>
 
