@@ -1,3 +1,4 @@
+// importing essential files
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../utils/mutations';
@@ -7,12 +8,20 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login({ setModal }) {
+
+    // we have a state to get the current form values
     const [formState, setFormState] = useState({ email: '', password: '' });
+
+    // sets login to use the login mutation
     const [login, { error }] = useMutation(LOGIN);
 
+    // we have a handler for form submit and we attempt to log in using the form state values.
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+
+        // uses the form state values to see if there are any accounts with the same values. if there is a match, we authenticate the user
         try {
+
             const { data } = await login({
                 variables: { email: formState.email, password: formState.password }
             });
@@ -21,7 +30,10 @@ export default function Login({ setModal }) {
             const decodeToken = decode(token);
             const userId = decodeToken.data._id;
             Auth.login(token, userId);
-        } catch (e) {
+        }
+
+        // if user authentication fails, a toast error message will appear.
+        catch (e) {
             toast.error("Invalid Login Credentials", {
                 position: "bottom-right",
                 autoClose: 5000,
@@ -34,6 +46,7 @@ export default function Login({ setModal }) {
         };
     };
 
+    // grabs the changed value of the text box and set the formstate accordingly to the new changed value
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormState({ ...formState, [name]: value });
