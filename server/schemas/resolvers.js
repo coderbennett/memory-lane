@@ -38,6 +38,12 @@ const resolvers = {
                 { new: true }
             );
         },
+        editMoment: async (parent, { momentId, title, description, imageLink, year, month, day }) => {
+            return Timeline.findOneAndUpdate(
+                { "moments._id": momentId },
+                { $set: { "moments.$.title": title, "moments.$.description": description, "moments.$.imageLink": imageLink, "moments.$.year": year, "moments.$.month": month, "moments.$.day": day }},
+            )
+        },
         deleteTimeline: async (parent, { timelineId }) => {
             return Timeline.findOneAndDelete({ _id: timelineId });
         },

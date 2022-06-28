@@ -44,6 +44,7 @@ const typeDefs = gql`
         addTimeline(title: String!, description: String!, author: String!): Timeline
         deleteTimeline(timelineId: ID!): Timeline
         addMoment(timelineId: ID!, title: String!, description: String!, imageLink: String!, year: Int!, month: Int, day: Int): Timeline
+        editMoment(momentId: ID!, title: String!, description: String!, imageLink: String!, year: Int!, month: Int, day: Int): Timeline
         deleteMoment(timelineId: ID!, momentId: ID!): Timeline
         login(email: String!, password: String!): Auth
     }
