@@ -265,7 +265,7 @@ const Timeline = () => {
                                 delete moments if they want */}
                                 {Auth.loggedIn() && Auth.getUser().data.username === timeline.author ? (
                                 <div className="card-actions justify-end">
-                                    <EditMoment timeline={timeline} momentId={moment._id}/>
+                                    <EditMoment timeline={timeline} moment={moment._id}/>
                                     <button className="btn btn-error hover:btn-warning" name={moment._id} onClick={handleDeleteBtn}>Delete Moment</button>
                                 </div>
                                 ) : (<></>)}
