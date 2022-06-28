@@ -19,16 +19,6 @@ export default function EditMoment({ timeline, momentId }) {
     
     const currentModal = "my-modal-" + momentId;
     
-    const [formState, setFormState] = useState({
-        title: '',
-        description: '',
-        imageLink: '',
-        year: 0,
-        month: 1,
-        day: 1
-    });
-    
-
     const [editMoment] = useMutation(EDIT_MOMENT);
 
     const renderDayOptions = (day) => {
@@ -46,14 +36,13 @@ export default function EditMoment({ timeline, momentId }) {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setFormState({...formState, [name]: value});
         setMomentState({...momentState, [name]: value});
     };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        let { title, description, imageLink, year, month, day} = formState;
+        let { title, description, imageLink, year, month, day} = momentState;
 
         try {
             await editMoment({
