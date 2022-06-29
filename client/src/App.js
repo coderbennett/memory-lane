@@ -10,7 +10,6 @@ import Timeline from './pages/Timeline';
 import Dashboard from './pages/Dashboard';
 import Header from '../src/components/Header/Header';
 
-
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
@@ -33,10 +32,13 @@ const client = new ApolloClient({
 
 function App() {
 
+  // initilizing cookie confirm
   let tempConfirm = false;
 
+  // checks if cookies compliance is ok w/ user
   localStorage.getItem('cookieConfirm') ? tempConfirm = true : tempConfirm = false;
 
+  // if cookie compliance has not been accepted, render a toast message for compliance
   useEffect(() => {
     if (!tempConfirm) {
       toast(<CookiesToast />, {
@@ -49,9 +51,10 @@ function App() {
         progress: undefined,
       });
       return;
-    }
-  })
+    };
+  });
 
+  // populate cookie compliance toast with html
   const CookiesToast = () => {
     return (
       <>
@@ -67,13 +70,10 @@ function App() {
       <Router>
         <div className="flex-column justify-flex-start min-100-vh">
           <Header />
-
           <Routes>
-
             <Route
               path="/"
               element={<Home />} />
-
             <Route
               path="/timeline/:timelineId"
               element={<Timeline />} />
@@ -81,7 +81,6 @@ function App() {
               path="/dashboard/:userId"
               element={<Dashboard />} />
           </Routes>
-
           <ToastContainer />
         </div>
       </Router>
